@@ -1,0 +1,121 @@
+/* =============== */
+/* GLOBAL RESET    */
+/* =============== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =============== */
+/* ROOT VARIABLES  */
+/* =============== */
+
+:root {
+  --text-color: rgb(246,246,246);
+  --accent-color: #e63946;
+  --link-color: #4dabf7;
+  --font-main: 'Inter', system-ui, sans-serif;
+  --max-width: 1200px;
+}
+
+/* ===================== */
+/* BODY & GLOBAL STYLES  */
+/* ===================== */
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: 
+    linear-gradient(90deg, rgb(5, 10, 26), rgb(8, 20, 70));
+background-blend-mode: multiply;
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+  color: var(--text-color);
+  font-family: var(--font-main);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ===================== */
+/* GLOBAL ELEMENT STYLES */
+/* ===================== */
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+a:hover {
+  opacity: 0.85;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ===================== */
+/* GLOBAL LAYOUT HELPERS */
+/* ===================== */
+
+.container {
+  width: 90%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+button {
+  font-family: var(--font-main);
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* ===================== */
+/* RESPONSIVENESS        */
+/* ===================== */
+
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    width: 95%;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    line-height: 1.5;
+  }
+}
+
+

@@ -1,0 +1,126 @@
+/* Layout */
+.wiki-layout {
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.wiki-sidebar {
+  width: 400px;
+  padding: 40px;
+  border-right: 1px solid #222;
+  background: rgb(2, 7, 26);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  margin-top: 120px;
+}
+.wiki-sidebar h2 {
+  font-size: 1.6rem;
+  margin-bottom: 30px;
+  font-family: 'Intel One Mono', monospace;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--link-color)
+}
+
+.wiki-sidebar ul {
+  border-left: 1px solid #ccc;
+  padding: 0 0 0 15px;
+  margin-bottom: 30px;
+}
+
+.wiki-sidebar a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.wiki-sidebar li {
+  margin-bottom: 8px;
+  font-size: 1.6rem;
+  font-family: 'Nunito Sans', sans-serif;
+  line-height: 1.5;
+  margin-left: -10px;
+  padding-left: 20px;
+}
+
+/* Main content area */
+.wiki-main {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  justify-content: left;
+  margin-top:120px;
+  padding-top: 10px
+}
+
+/* Content wrapper */
+.wiki-content {
+  width: 100%;
+  max-width: 1200px;
+  font-size: 1.47rem;
+  font-family: 'Nunito Sans', sans-serif;
+  color: var(--text-color);
+  line-height: 1.67;
+}
+
+/* Typography (Editor.js blocks use h1…h4, p, etc.) */
+.wiki-content h1,
+.wiki-content h2,
+.wiki-content h3,
+.wiki-content h4 {
+  margin-top: 32px;
+  margin-bottom: 12px;
+  line-height: 1.2;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.wiki-content p {
+  line-height: 1.6;
+  margin: 16px 0;
+}
+
+/* Images from Editor.js */
+.wiki-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 24px auto;
+}
+
+/* Lists */
+.wiki-content ul,
+.wiki-content ol {
+  padding-left: 24px;
+  margin: 16px 0;
+}
+
+/* Tables */
+.wiki-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+}
+
+.wiki-content table th,
+.wiki-content table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+/* Block spacing — ensures Editor.js blocks don't overlap */
+.wiki-content > * + * {
+  margin-top: 20px;
+}
+
+/* Links */
+.wiki-content a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.wiki-content a:hover {
+  text-decoration: underline;
+}
