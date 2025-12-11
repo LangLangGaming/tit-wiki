@@ -124,3 +124,56 @@
 .wiki-content a:hover {
   text-decoration: underline;
 }
+.toc-panel {
+  width: 460px;
+  padding: 2.67rem;
+  border-left: 1px solid #e2e2e2;
+  position: sticky;
+  top: 80px;
+  height: max-content;
+  margin-top: 120px
+}
+
+/* Header */
+.toc-header h3 {
+  font-size: 1.67rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  color: var(--link-color);
+  font-family: 'Intel One Mono', monospace;
+}
+
+/* TOC List */
+.toc-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.toc-item {
+  margin-bottom: 0.4rem;
+}
+
+.toc-item a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: block;
+  font-size: 1.6rem
+}
+
+/* Indentation for different heading levels */
+.toc-item.level-1 {
+  padding-left: 0;
+}
+
+.toc-item.level-2 {
+  padding-left: 1rem;
+}
+
+.toc-item.level-3 {
+  padding-left: 2rem;
+}
+

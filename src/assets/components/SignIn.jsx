@@ -8,6 +8,7 @@ function SignIn() {
     return (
         <>
             <button className="sign-in-button"> 
+                <Icon icon="simple-icons:google" width="24" height="24" />
                 Sign In
                 </button>
         </>

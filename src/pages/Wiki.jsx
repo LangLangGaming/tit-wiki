@@ -54,8 +54,33 @@ Unification of Germany into the modern nation-state, led by Prussia, established
 Germany is a developed country with a strong economy; it has the largest economy in Europe by nominal GDP. As a major force in several industrial, scientific and technological sectors, Germany is both the world's third-largest exporter and third-largest importer. Widely considered a great power, Germany is part of multiple international organisations and forums. It has the third-highest number of UNESCO World Heritage Sites: 55, of which 52 are cultural.<br /> <br />
           </article>  
         </main>
+         <aside className="toc-panel">
+    <div className="toc-header">
+      <h3>On this page</h3>
+    </div>
 
+    <nav className="toc-list">
+      <ul>
+        <li className="toc-item level-1">
+          <a href="#section-1">Section 1 Title</a>
+        </li>
+        <li className="toc-item level-2">
+          <a href="#subsection-1-1">Subsection 1.1 Title</a>
+        </li>
+        <li className="toc-item level-2">
+          <a href="#subsection-1-2">Subsection 1.2 Title</a>
+        </li>
+        <li className="toc-item level-1">
+          <a href="#section-2">Section 2 Title</a>
+        </li>
+        <li className="toc-item level-3">
+          <a href="#deep-3">Deep Level 3 Header</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
       </div>
+      
     </>
   )
 }

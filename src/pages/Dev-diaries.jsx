@@ -1,12 +1,11 @@
 import React from "react";
-import '../assets/css/Credits.css';
+import '../assets/css/Dev-diaries.css';
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
 
-function Credits() {
+function DevDiaries() {
     return (
         <>
-         
             <div className="title">
                 <h1>Not Available</h1>
                 <p>As of the current release, this page is still a work in progress and and thus will not be released. In the meantime, you can browse our Wiki page or join our Discord to interact with our developers and receive updates on the mod or site. </p>
@@ -23,4 +22,4 @@ function Credits() {
     )
 }
 
-export default Credits
+export default DevDiaries;

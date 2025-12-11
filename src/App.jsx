@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router'
 import Wiki from './pages/Wiki.jsx'
 import Credits from './pages/Credits.jsx'
 import Home from './pages/Home.jsx'
+import DevDiaries from './pages/Dev-diaries.jsx'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/wiki" element={<Wiki />} />
         <Route path="/credits" element={<Credits />} />
+        <Route path="/dev-diaries" element={<DevDiaries />} />
       </Routes>
     </Router>
     </>

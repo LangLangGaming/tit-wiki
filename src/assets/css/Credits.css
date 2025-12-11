@@ -1,0 +1,51 @@
+.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(900px, 90%);
+    text-align: center;
+    z-index: 2;
+}
+
+/* Heading */
+.title h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 800;
+    margin: 0 0 0.2rem 0;
+    line-height: 1
+}
+
+/* Paragraph */
+.title p {
+    font-size: clamp(1rem, 2.5vw, 1.67rem);
+    color: var(--text-color);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    line-height: 1.5;
+    width: 100%;
+    margin: 0.75rem auto 0 auto;
+}
+
+/* Wiki Button */
+.wiki-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #202020;
+    background-color: #1A73E8;
+    border-radius: 15px;
+    font-size: clamp(1rem, 2.8vw, 1.6rem);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.15s ease;
+    white-space: nowrap;
+    min-width: 150px;
+    padding: 12px 24px;
+    margin: 20px auto 0 auto;
+    gap: 10px;
+    margin-right: 10px
+}
