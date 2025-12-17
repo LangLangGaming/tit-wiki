@@ -21,7 +21,7 @@ function Navbar() {
                     <Link to="/wiki">Wiki</Link>
                     <Link to="/dev-diaries">Dev Diaries</Link>
                     <Link to="/credits">Credits</Link>
-                    <SignIn />
+                <SignIn />
                 </div>
             </nav>
         </>

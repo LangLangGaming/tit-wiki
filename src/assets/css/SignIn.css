@@ -18,3 +18,53 @@
   gap: 10px;
 
 }
+
+.sign-in-button img {
+  border-radius: 50%;
+}
+
+.signin-wrapper {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(-4px);
+  transition:
+    max-height 0.28s ease,
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  z-index: 1000;
+  justify-content: right
+}
+
+/* When open — dropdown expands smoothly */
+.dropdown-menu.open {
+  max-height: 500px; /* just needs to be bigger than your content */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dropdown buttons inside (non-animated) */
+.dropdown-menu button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #202020;
+  background-color: #1A73E8;
+  border-radius: 15px;
+  font-size: 1.5rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+  margin: 10px;
+  gap: 10px;
+    min-width: 250px
+}
+
+

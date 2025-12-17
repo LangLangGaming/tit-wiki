@@ -177,3 +177,65 @@
   padding-left: 2rem;
 }
 
+@media screen and (max-width: 900px) {
+
+  /* Layout becomes vertical */
+  .wiki-layout {
+    flex-direction: column;
+  }
+
+  /* Sidebar becomes offscreen by default */
+  .wiki-sidebar {
+    position: fixed;
+    left: -400px;
+    top: 0;
+    height: 100vh;
+    z-index: 9999;
+    transition: left 0.3s ease;
+    margin-top: 0; /* override your desktop value */
+    width: 80%; /* auto scale */
+    max-width: 320px;
+    padding: 25px;
+  }
+
+  /* Slide-in on hover/tap */
+  .wiki-sidebar:active,
+  .wiki-sidebar:hover {
+    left: 0;
+  }
+
+  /* Fake hamburger button */
+  .wiki-sidebar::before {
+    content: "☰";
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 2.5rem;
+    z-index: 10000;
+    color: white;
+    cursor: pointer;
+  }
+
+  /* Ensure wiki-main is full width */
+  .wiki-main {
+    width: 100%;
+    margin-top: 80px;
+    padding: 20px;
+  }
+
+  /* Hide the TOC on small screens */
+  .toc-panel {
+    display: none;
+  }
+
+  /* Resize typography */
+  .wiki-content {
+    font-size: 1.3rem;
+    padding: 0;
+  }
+
+  .wiki-content img {
+    max-width: 100%;
+  }
+}
+
