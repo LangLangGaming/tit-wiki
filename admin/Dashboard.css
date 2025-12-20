@@ -1,0 +1,135 @@
+/* Ensure the editor is actually visible */
+#editorjs {
+min-height: 500px;
+  padding: 20px;
+  padding-top: 120px;
+  background-color: #fff;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px; /* Optional: adds a slight curve to match modern UIs */
+  width: 100%; 
+}
+
+
+/* Logic for Text Wrap around images */
+.ce-block__content {
+  max-width: 100%; /* Allows text to fill width */
+}
+
+.image-tool {
+  float: left;
+  margin: 0 20px 10px 0;
+  max-width: 45%; /* Adjust this to control wrap behavior */
+}
+
+/* Category Inputs */
+.meta-inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Update your wrapper to allow full-width headers */
+.wiki-editor-wrapper {
+  width: 100%; /* Change from max-width to full width */
+  margin: 0;   /* Remove auto margin here */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* This centers the editor within the full-width screen */
+}
+.editor-header {
+  width: 100%;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.1); /* Match your site's dark theme if needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Keep the actual editor at a readable width */
+.editor-main {
+  max-width: 850px;
+  width: 90%;
+  margin: 40px auto;
+}
+
+/* Category Selection Layout */
+.meta-inputs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.category-select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  background-color: #f8f9fa;
+  font-size: 0.9rem;
+  color: #555;
+  cursor: pointer;
+}
+
+.custom-category-input {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #1a73e8;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.wiki-title-input {
+  width: 100%;
+  font-size: 2.8rem;
+  font-weight: 800;
+  border: none;
+  outline: none;
+  color: #111;
+  margin-top: 10px;
+}
+
+.wiki-hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 20px 0 30px 0;
+}
+
+
+/* Float Image Styling for Text Wrap */
+.ce-block--stretched .ce-block__content {
+  max-width: 100%;
+}
+
+.image-tool {
+  float: left;
+  margin: 0 20px 10px 0;
+  max-width: 40%;
+}
+
+/* Publish Button */
+.editor-actions {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.publish-btn {
+  background-color: #1a73e8;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.publish-btn:hover {
+  background-color: #1557b0;
+}
+
+.publish-btn:disabled {
+  background-color: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+}
