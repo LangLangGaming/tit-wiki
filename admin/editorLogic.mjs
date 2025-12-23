@@ -4,12 +4,17 @@ import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import ImageTool from '@editorjs/image';
 import { db, storage } from '../src/firebase.config.js'; 
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { 
+  collection, 
+  addDoc, 
+  getDocs, 
+  doc, 
+  updateDoc, 
+  serverTimestamp 
+} from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export const useWikiEditor = () => {
-    const element = document.getElementById('editorjs');
-    if (!element) return;
   const editorInstance = useRef(null);
 
   useEffect(() => {
@@ -52,44 +57,87 @@ export const useWikiEditor = () => {
     };
   }, []);
 
-const onSave = async (title, category) => {
+  // --- NEW: Fetch all pages from Firestore ---
+  const fetchAllPages = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "wikiPages"));
+      return querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+    } catch (error) {
+      console.error("Error fetching pages:", error);
+      return [];
+    }
+  };
+const loadContent = async (contentData) => {
   if (!editorInstance.current) return;
-
   try {
-    const editorData = await editorInstance.current.save();
-
-    // CHECK: Stop the upload if there are no blocks or content
-    if (!editorData.blocks || editorData.blocks.length === 0) {
-      alert("The editor is empty. Please add some content before publishing.");
-      return;
+    let data;
+    // Check if it's already an object or a stringified JSON
+    if (typeof contentData === 'string') {
+      try {
+        data = JSON.parse(contentData);
+      } catch (e) {
+        // If parsing fails, it's a legacy plain string. Wrap it in a block.
+        data = {
+          blocks: [{
+            type: "paragraph",
+            data: { text: contentData }
+          }]
+        };
+      }
+    } else {
+      data = contentData;
     }
 
-    // Optional: Advanced check to see if the first block is just an empty paragraph
-    const firstBlock = editorData.blocks[0];
-    if (editorData.blocks.length === 1 && 
-        firstBlock.type === 'paragraph' && 
-        (!firstBlock.data.text || firstBlock.data.text.trim() === "")) {
-      alert("Cannot publish an empty page.");
-      return;
-    }
-
-    // Generates a URL-friendly slug
-    const slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
-
-    await addDoc(collection(db, "wikiPages"), {
-      category: category.toLowerCase(), 
-      content: JSON.stringify(editorData),
-      published: false,
-      slug: slug,
-      title: title,
-      updatedAt: serverTimestamp()
-    });
-    
-    alert("Wiki page published successfully!");
+    await editorInstance.current.isReady;
+    await editorInstance.current.render(data);
   } catch (e) {
-    console.error("Save failed:", e);
+    console.error("Failed to load content:", e);
   }
 };
+  // --- UPDATED: onSave (Handles both Create and Update) ---
+  const onSave = async (title, category, existingId = null) => {
+    if (!editorInstance.current) return;
 
-  return { onSave };
+    try {
+      const editorData = await editorInstance.current.save();
+
+      if (!editorData.blocks || editorData.blocks.length === 0) {
+        alert("The editor is empty.");
+        return;
+      }
+
+      const slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
+      
+      const pageData = {
+        category: category.toLowerCase(), 
+        content: JSON.stringify(editorData),
+        slug: slug,
+        title: title,
+        updatedAt: serverTimestamp()
+      };
+
+      if (existingId) {
+        // UPDATE existing document
+        const docRef = doc(db, "wikiPages", existingId);
+        await updateDoc(docRef, pageData);
+        alert("Wiki page updated successfully!");
+      } else {
+        // CREATE new document
+        await addDoc(collection(db, "wikiPages"), {
+          ...pageData,
+          published: false,
+          createdAt: serverTimestamp()
+        });
+        alert("Wiki page published successfully!");
+      }
+    } catch (e) {
+      console.error("Save failed:", e);
+    }
+  };
+
+  // Make sure EVERYTHING is returned here
+  return { onSave, fetchAllPages, loadContent };
 };
