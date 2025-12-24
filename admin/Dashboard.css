@@ -1,160 +1,30 @@
-/* Ensure the editor is actually visible */
-#editorjs {
-min-height: 500px;
-  padding: 20px;
-  border: 1px solid #f0f0f0;
-  border-radius: 4px;
-  width: 100%;
-  z-index: 10; 
-  cursor: text;
-  box-sizing: border-box;
-}
-
-
-
-.ce-block__content {
-  max-width: 100%; 
-}
-
-.image-tool {
-  float: left;
-  margin: 0 20px 10px 0;
-  max-width: 45%; 
-}
-
-
-.meta-inputs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-
-.wiki-editor-wrapper {
-  width: 100%; 
-  margin: 0;   
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center; 
-}
-.editor-header {
-  width: 100%;
-  padding: 20px 40px;
-  background: rgba(255, 255, 255, 0.1); 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.editor-main {
-  max-width: 100% !important;
-  width: 100% !important;
-  margin: 0 !important;
-}
-
-.meta-inputs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 15px;
-}
-
-.category-select {
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  background-color: #f8f9fa;
-  font-size: 0.9rem;
-  color: #555;
-  cursor: pointer;
-}
-
-.custom-category-input {
-  padding: 8px 12px;
-  border-radius: 6px;
-  border: 1px solid #1a73e8;
-  font-size: 0.9rem;
-  outline: none;
-}
-
-.wiki-title-input {
-  width: 100%;
-  font-size: 2.8rem;
-  font-weight: 800;
-  border: none;
-  outline: none;
-  color: #111;
-  margin-top: 10px;
-}
-
-.wiki-hr {
-  border: 0;
-  border-top: 1px solid #eee;
-  margin: 20px 0 30px 0;
-}
-.ce-block__content, 
-.ce-toolbar__content {
-  max-width: 95% !important; /* Using 95% instead of 100% prevents text from touching the very edge */
-}
-
-.image-tool {
-  float: left;
-  margin: 0 20px 10px 0;
-  max-width: 40%;
-}
-
-/* Publish Button */
-.editor-actions {
-  margin-top: 40px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.publish-btn {
-  background-color: #1a73e8;
-  color: white;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.publish-btn:hover {
-  background-color: #1557b0;
-}
-
-.publish-btn:disabled {
-  background-color: #e0e0e0;
-  color: #999;
-  cursor: not-allowed;
-}
-
-/* Layout Wrapper */
+/* --- 1. CORE LAYOUT --- */
 .wiki-container-layout {
   display: flex;
   height: calc(100vh - 120px); 
   padding-top: 120px;
+  background-color: rgb(5, 10, 26); /* Match the editor background */
+  color: white;
 }
 
-/* Sidebar Styles */
+/* --- 2. SIDEBAR --- */
 .editor-sidebar {
   width: 300px;
-  border-right: 1px solid #e0e0e0;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .sidebar-header {
   padding: 20px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .new-page-btn {
   width: 100%;
   padding: 10px;
-  background: #007bff;
+  background: #1a73e8;
   color: white;
   border: none;
   border-radius: 6px;
@@ -163,7 +33,7 @@ min-height: 500px;
 }
 
 .new-page-btn.active {
-  background: #0056b3;
+  background: #0d47a1;
 }
 
 .page-list {
@@ -175,7 +45,6 @@ min-height: 500px;
 .sidebar-item {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   width: 100%;
   padding: 12px;
   margin-bottom: 5px;
@@ -183,33 +52,32 @@ min-height: 500px;
   background: transparent;
   border-radius: 8px;
   cursor: pointer;
-  text-align: left;
   transition: background 0.2s;
 }
 
 .sidebar-item:hover {
-  background: #f0f7ff;
+  background: rgba(26, 115, 232, 0.1);
 }
 
 .sidebar-item.active {
-  background: #e7f3ff;
-  border-left: 4px solid #007bff;
+  background: rgba(26, 115, 232, 0.2);
+  border-left: 4px solid #1a73e8;
 }
 
 .item-title {
   font-weight: 600;
   font-size: 14px;
-  color: #333;
+  color: #efefef;
 }
 
 .item-meta {
   font-size: 11px;
-  color: #888;
+  color: #1a73e8;
   text-transform: uppercase;
   margin-top: 4px;
 }
 
-/* Editor Adjustments */
+/* --- 3. MAIN EDITOR WRAPPER --- */
 .wiki-editor-wrapper {
   flex-grow: 1;
   display: flex;
@@ -218,19 +86,18 @@ min-height: 500px;
   overflow-y: auto;
 }
 
+.editor-header {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
 .category-row {
   margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.codex-editor__redactor {
-  max-width: 100% !important;
-  margin-right: 0 !important;
-  padding-bottom: 100px !important;
-}
-
-.editor-content {
-  width: 100%
-}
 .toggle-btn {
   padding: 8px 18px;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -238,13 +105,106 @@ min-height: 500px;
   color: white;
   border-radius: 20px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: 0.2s;
 }
 
-/* This will trigger when the category matches */
 .toggle-btn.active {
-  background-color: #1a73e8 !important; /* Blue color */
+  background-color: #1a73e8 !important;
   border-color: #1a73e8 !important;
+}
+
+.custom-category-input {
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: 1px solid #1a73e8;
+  background: transparent;
+  color: white;
+  outline: none;
+}
+
+.wiki-title-input {
+  width: 100%;
+  font-size: 2.8rem;
+  font-weight: 800;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: white;
+}
+
+/* --- 4. EDITOR.JS DARK THEME & WIDTH --- */
+.editor-content {
+  width: 100%;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+#editorjs {
+  min-height: 500px;
+  width: 100%;
+  cursor: text;
+}
+
+/* Force Width */
+.codex-editor__redactor {
+  max-width: 100% !important;
+  margin-right: 0 !important;
+  padding-bottom: 100px !important;
+}
+
+.ce-block__content, 
+.ce-toolbar__content {
+  max-width: 95% !important;
+}
+
+/* The Nuke for White Menus */
+.ce-popover, 
+.ce-popover--opened,
+.ce-settings, 
+.ce-conversion-toolbar, 
+.ce-inline-toolbar {
+  background-color: #0f172a !important; 
+  border: 1px solid #334155 !important;
   color: white !important;
-  box-shadow: 0 0 10px rgba(26, 115, 232, 0.5);
+}
+
+.ce-popover__search,
+.ce-popover__search-input {
+  background-color: #1e293b !important;
+  color: white !important;
+}
+
+.ce-popover__item-label, 
+.ce-popover__item-icon, 
+.ce-settings__button,
+.ce-inline-tool {
+  color: #f1f5f9 !important;
+}
+
+.ce-popover__item:hover, 
+.ce-settings__button:hover {
+  background-color: #1e293b !important;
+}
+
+/* --- 5. FOOTER ACTIONS --- */
+.editor-actions {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 40px;
+}
+
+.publish-btn {
+  background-color: #1a73e8;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.publish-btn:disabled {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
+  cursor: not-allowed;
 }

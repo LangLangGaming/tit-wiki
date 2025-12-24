@@ -1,0 +1,73 @@
+.ce-popover,
+.ce-popover--opened,
+.ce-settings,
+.ce-conversion-toolbar,
+.ce-inline-toolbar,
+.tc-popover {
+  background-color: #1a1d24 !important;
+  border: 1px solid #3d4450 !important;
+  color: #ffffff !important;
+}
+
+
+.ce-popover__search,
+.ce-popover__search-input,
+.tc-popover__search,
+.tc-popover__search-input {
+  background-color: #262b35 !important;
+  color: #ffffff !important;
+  border: 1px solid #3d4450 !important;
+}
+
+.ce-popover *,
+.ce-settings *,
+.ce-inline-toolbar * {
+  color: #e5e7eb !important;
+}
+
+.ce-block--focused .ce-block__content {
+  background: transparent !important;
+}
+
+.ce-popover__container,
+.ce-popover__items,
+.ce-settings__default-zone,
+.ce-conversion-toolbar__container {
+  background-color: #1a1d24 !important;
+}
+
+.ce-inline-toolbar__dropdown,
+.ce-inline-toolbar__actions {
+  background-color: #1a1d24 !important;
+}
+
+.ce-inline-toolbar__dropdown,
+.ce-inline-toolbar__actions {
+  background-color: #1a1d24 !important;
+}
+
+.ce-block--selected .ce-block__content,
+.ce-block--selected {
+  background: transparent !important;
+}
+
+.ce-block:focus-within .ce-block__content {
+  background: transparent !important;
+}
+
+.ce-block::before {
+  display: none !important;
+}
+
+.ce-block--selected .ce-block__content {
+  background: rgba(56, 189, 248, 0.08) !important;
+}
+
+.ce-toolbar__plus:hover,
+.ce-toolbar__settings-btn:hover,
+.ce-popover__item:hover,
+.ce-settings__button:hover,
+.ce-conversion-tool:hover,
+.ce-inline-tool:hover {
+  opacity: 0.7 !important;
+}

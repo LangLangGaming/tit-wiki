@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
+import "./Editor.css";
 import { useWikiEditor } from "../admin/editorLogic.mjs";
 
 const WikiEditor = () => {
@@ -130,13 +131,20 @@ const WikiEditor = () => {
         </main>
 
         <footer className="editor-actions">
-          <button 
-            className="publish-btn" 
-            onClick={() => onSave(title, finalCategory, selectedPageId)}
-            disabled={!title || (isCreatingNew && !customCategory)}
-          >
-            {selectedPageId ? "Update Wiki Page" : "Publish to Firebase"}
-          </button>
+<button 
+  className="publish-btn" 
+  onClick={async () => {
+    await onSave(title, finalCategory, selectedPageId);
+    if (isCreatingNew) {
+      setCategory(customCategory);
+      setIsCreatingNew(false);
+      setCustomCategory("");
+    }
+  }}
+  disabled={!title || (isCreatingNew && !customCategory)}
+>
+  {selectedPageId ? "Update Wiki Page" : "Publish to Firebase"}
+</button>
         </footer>
       </div>
     </div>

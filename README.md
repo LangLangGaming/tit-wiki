@@ -12,3 +12,23 @@ This project requires Node.js, which you can find [here](https://nodejs.org/en/d
 1) First, clone the repo using ```git clone```
 2) In VSC, run ```npm run dev``` in the terminal. This will start a local development server, which is needed for dynamic sites like this.
 3) You've done it! 
+
+*[ANNOUNCEMENT TO BE POSTED]*
+# The Talons In Twiight Website Announcement!
+Today, the Talons In Twilight team is proud to announce its new upcoming website! 
+
+## Features:
+**Custom-built wiki system**
+The main purpose of the website is the wiki, meant as a platform to document the mod's many features, and serve as a memory refresher for the lore. (We highly suggest checking out LoreDad's Project Stressa series to see how this timeline evolved to its current state)
+
+**Developer Diaries**
+Before, dev diaries were posted on Discord in the form of Google Docs. On release, all dev diaries will be posted on this website, to streamline the reading experience and make all diaries easily accessible. 
+
+## Release Date:
+There will be two release dates, as described below. 
+
+**Alpha Release (For Devs)**
+Currently, access to the website is limited to one person (@LangLangGaming, the developer) only. On Alpha Release, access will be granted to all active developers working on the mod, allowing them to begin writing the pages. This also serves as a bug-testing session, allowing us to fix any bugs before the public gets ahold of them. 
+
+**Public Release (v1.0.0)**
+This is the official public release, scheduled to happen early/mid January 2026.  
