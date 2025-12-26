@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import "./Editor.css";
 import { useWikiEditor } from "../admin/editorLogic.mjs";
+import { db } from "../src/firebase.config.js";
+import { doc, deleteDoc } from "firebase/firestore";
 
 const WikiEditor = () => {
   const [title, setTitle] = useState("");
@@ -92,7 +94,7 @@ const WikiEditor = () => {
         className={`toggle-btn ${isActive ? "active" : ""}`}
         onClick={() => {
           setIsCreatingNew(false);
-          setCategory(cat); // This sets it to the capitalized version for consistency
+          setCategory(cat); 
         }}
       >
         {cat}
@@ -145,6 +147,25 @@ const WikiEditor = () => {
 >
   {selectedPageId ? "Update Wiki Page" : "Publish to Firebase"}
 </button>
+        {selectedPageId && (
+          <button
+            className="delete-btn"
+            onClick={async () => {
+              if (!window.confirm("Delete this page? This action cannot be undone.")) return;
+              try {
+                await deleteDoc(doc(db, "wikiPages", selectedPageId));
+                const data = await fetchAllPages();
+                setPages(data);
+                handleSelectPage("");
+                alert("Deleted successfully!");
+              } catch (e) {
+                console.error("Delete failed:", e);
+              }
+            }}
+          >
+            Delete Page
+          </button>
+        )}
         </footer>
       </div>
     </div>

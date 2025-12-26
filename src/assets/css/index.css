@@ -25,8 +25,14 @@
 /* ===================== */
 
 html {
-  font-size: 16px;
+  /* reduce base font-size to scale UI down by 20% in a layout-safe way */
+  font-size: 12.8px; /* 16px * 0.8 */
   scroll-behavior: smooth;
+}
+
+/* navbar spacing variable */
+:root {
+  --navbar-height: 72px;
 }
 
 body {
@@ -41,6 +47,8 @@ background-attachment: fixed;
   font-family: var(--font-main);
   line-height: 1.6;
   min-height: 100vh;
+  /* ensure content is pushed below a fixed navbar */
+  padding-top: var(--navbar-height);
 }
 
 /* ===================== */
@@ -115,6 +123,17 @@ button:hover {
 
   body {
     line-height: 1.5;
+  }
+}
+
+/* Disable global scaling on small screens for readability */
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    padding-top: 56px;
   }
 }
 

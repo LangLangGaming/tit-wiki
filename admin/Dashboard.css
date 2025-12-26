@@ -1,8 +1,9 @@
+
+
 /* --- 1. CORE LAYOUT --- */
 .wiki-container-layout {
   display: flex;
-  height: calc(100vh - 120px); 
-  padding-top: 120px;
+  padding-top: 20px;
   background-color: rgb(5, 10, 26); /* Match the editor background */
   color: white;
 }
@@ -125,21 +126,23 @@
 .wiki-title-input {
   width: 100%;
   font-size: 2.8rem;
-  font-weight: 800;
+  font-weight: 900;
   border: none;
   background: transparent;
   outline: none;
   color: white;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 /* --- 4. EDITOR.JS DARK THEME & WIDTH --- */
 .editor-content {
   width: 100%;
   font-family: 'Nunito Sans', sans-serif;
+  font-size: 1.3rem;
 }
 
 #editorjs {
-  min-height: 500px;
+  min-height: 450px;
   width: 100%;
   cursor: text;
 }
@@ -148,7 +151,8 @@
 .codex-editor__redactor {
   max-width: 100% !important;
   margin-right: 0 !important;
-  padding-bottom: 100px !important;
+  /* remove excessive bottom padding that created large empty space */
+  padding-bottom: 16px !important;
 }
 
 .ce-block__content, 
@@ -187,10 +191,10 @@
 
 /* --- 5. FOOTER ACTIONS --- */
 .editor-actions {
-  margin-top: 40px;
+  margin-top: 24px;
   display: flex;
   justify-content: flex-end;
-  padding-bottom: 40px;
+  padding-bottom: 8px;
 }
 
 .publish-btn {
@@ -207,4 +211,15 @@
   background-color: rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.3);
   cursor: not-allowed;
+}
+
+.delete-btn {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 10px;
 }
