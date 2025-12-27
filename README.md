@@ -4,10 +4,10 @@ Talons in Twilight is a HOI4 Mod where a German Republic led Democratic Faction 
 This project uses a React + Vite setup, and Firebase as the main auth/backend provider. 
 
 ## WEB DEVELOPER SECTION
-To any web developers looking through this repo who know their craft (and are offended by the horrendous code):
+To any web developers looking through this repo who know their craft (and are offended by the horrendous code):   
 I'm a very amateur developer and a beginner at React. This site is meant as a platform for me to learn new things and practices, which will help me make better websites in the future. Hence, you will see very unoptimized and crappy code in this repo, or things that might not be considered best practice. I welcome any sort of constructive criticism; you can contact me through my Discord (@langlanggaming).
 
-Regarding the absence of TailwindCSS in this codebase:
+Regarding the absence of TailwindCSS in this codebase:  
 I know many seasoned developers might berate me for not using Tailwind, as it is normally the recommended framework for UI design. However, I have chosen to not use it, simply because I have not fully mastered its syntax. Learning it while doing this might take too much time and be more confusing than regular CSS, and I wanted to get a barebones working version out to the devs so that writing can actually commence. I might rewrite the entire codebase to fit Tailwind later on, but it is not a main priority for me now. If you want to take on the challenge of rewriting it, you are welcome to create a pull request to do so. 
 
 
@@ -23,11 +23,11 @@ This project requires Node.js, which you can find [here](https://nodejs.org/en/d
 Today, the Talons In Twilight team is proud to announce its new upcoming website! 
 
 ## Features:
-**Custom-built wiki system**
-The main purpose of the website is the wiki, meant as a platform to document the mod's many features, and serve as a memory refresher for the lore. (We highly suggest checking out LoreDad's Project Stressa series to see how this timeline evolved to its current state)
+**Custom-built wiki system**  
+The primary purpose of the website is the wiki, which serves as a platform to document the mod's numerous features and acts as a memory refresher for the lore. (We highly suggest checking out LoreDad's Project Stressa series to see how this timeline evolved to its current state)
 
-**Developer Diaries**
+**Developer Diaries**  
 Before, dev diaries were posted on Discord in the form of Google Docs. On release, all dev diaries will be posted on this website, to streamline the reading experience and make all diaries easily accessible. 
 
-## Release Date:
-An official release is expected to happen in Jan-Feb 2026. As of 26th December, the site is under heavy development and is not stable. An official announcement will be made through our social media platforms as well as Discord when the time comes. 
+## Release Date:  
+An official release is expected to happen in Jan-Feb 2026. As of the time of this announcement, the site is under heavy development and is not stable. An official announcement will be made through our social media platforms as well as Discord when the time comes. 
