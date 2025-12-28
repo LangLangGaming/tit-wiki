@@ -20,6 +20,9 @@
   --max-width: 1200px;
 }
 
+/* ensure root elements have full height so children can use 100% reliably */
+html, body, #root { height: 100%; }
+
 /* ===================== */
 /* BODY & GLOBAL STYLES  */
 /* ===================== */
@@ -46,7 +49,7 @@ background-attachment: fixed;
   color: var(--text-color);
   font-family: var(--font-main);
   line-height: 1.6;
-  min-height: 100vh;
+  min-height: 100%;
   /* ensure content is pushed below a fixed navbar */
   padding-top: var(--navbar-height);
 }
@@ -128,13 +131,11 @@ button:hover {
 
 /* Disable global scaling on small screens for readability */
 @media (max-width: 768px) {
+  :root { --navbar-height: 56px; }
   html {
     font-size: 16px;
   }
 
-  body {
-    padding-top: 56px;
-  }
 }
 
 

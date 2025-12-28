@@ -17,10 +17,15 @@
   flex-direction: column;
   background: rgba(255, 255, 255, 0.02);
 }
+/* Keep sidebar fixed width and prevent it from shrinking when main content grows */
+.editor-sidebar { flex: 0 0 300px; }
 
 .sidebar-header {
   padding: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1.67rem;
+  font-weight: 800;
 }
 
 .new-page-btn {
@@ -32,6 +37,7 @@
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 1.1rem
 }
 
 .new-page-btn.active {
@@ -87,6 +93,8 @@
   padding: 20px 40px;
   overflow-y: auto;
 }
+/* Allow the editor area to shrink and avoid forcing the whole page wider */
+.wiki-editor-wrapper { min-width: 0; overflow-x: auto; }
 
 .editor-header {
   width: 100%;
@@ -113,6 +121,70 @@
 .toggle-btn.active {
   background-color: #1a73e8 !important;
   border-color: #1a73e8 !important;
+  color: white;
+}
+.publish-toggle-btn {
+  background-color: transparent;
+  padding: 10px 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: 10px;
+  display: inline-flex;
+  align-items: center;
+  background-color: whitesmoke;
+  font-size: 1.3rem
+}
+
+.category-with-delete {
+  display: inline-block;
+  position: relative;
+  margin-right: 8px;
+}
+
+.category-with-delete .toggle-btn {
+  padding-right: 34px; /* space for the delete cross */
+}
+
+.category-delete-btn {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.04);
+  color: #ff6b6b;
+  border: 1px solid rgba(255,107,107,0.12);
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  padding: 3px 6px;
+  border-radius: 999px;
+  z-index: 2;
+}
+
+.category-delete-btn:hover {
+  background: rgba(255, 107, 107, 0.12);
+}
+
+.custom-create-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.create-category-btn {
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: white;
+  cursor: pointer;
+}
+
+.create-category-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .custom-category-input {
@@ -207,6 +279,9 @@
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.3rem
 }
 
 .publish-btn:disabled {
@@ -224,4 +299,8 @@
   font-weight: 600;
   cursor: pointer;
   margin-left: 10px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.3rem
 }
+

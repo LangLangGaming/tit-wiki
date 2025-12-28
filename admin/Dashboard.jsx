@@ -3,7 +3,8 @@ import "./Dashboard.css";
 import "./Editor.css";
 import { useWikiEditor } from "../admin/editorLogic.mjs";
 import { db } from "../src/firebase.config.js";
-import { doc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import {Icon } from '@iconify/react';
 
 const WikiEditor = () => {
   const [title, setTitle] = useState("");
@@ -15,7 +16,8 @@ const WikiEditor = () => {
   const [pages, setPages] = useState([]);
   const [selectedPageId, setSelectedPageId] = useState("");
 
-  const categories = ["Organizations", "Europe", "Asia", "Americas", "Africa", "Oceania", "Other"];
+  const initialCategories = ["Organizations", "Europe", "Asia", "Americas", "Africa", "Oceania", "Other"];
+  const [categories, setCategories] = useState(initialCategories);
 
   useEffect(() => {
     const getExistingPages = async () => {
@@ -56,10 +58,9 @@ const WikiEditor = () => {
 
   return (
     <div className="wiki-container-layout">
-      {/* SIDEBAR */}
       <aside className="editor-sidebar">
         <div className="sidebar-header">
-          <h3>Wiki Pages</h3>
+          <h3>Page List</h3>
           <button 
             className={`new-page-btn ${selectedPageId === "" ? "active" : ""}`}
             onClick={() => handleSelectPage("")}
@@ -83,40 +84,75 @@ const WikiEditor = () => {
       <div className="wiki-editor-wrapper">
         <header className="editor-header">
           <div className="category-row">
-<div className="button-scroll-container">
-  {categories.map((cat) => {
-  
-    const isActive = !isCreatingNew && category?.toLowerCase() === cat.toLowerCase();
-    
-    return (
-      <button
-        key={cat}
-        className={`toggle-btn ${isActive ? "active" : ""}`}
-        onClick={() => {
-          setIsCreatingNew(false);
-          setCategory(cat); 
-        }}
-      >
-        {cat}
-      </button>
-    );
-  })}
-  
-  <button 
-    className={`toggle-btn ${isCreatingNew ? "active" : ""}`}
-    onClick={() => setIsCreatingNew(true)}
-  >
-    + Custom
-  </button>
-</div>
+  <div className="button-scroll-container">
+    {categories.map((cat) => {
+
+      const isActive = !isCreatingNew && category?.toLowerCase() === cat.toLowerCase();
+
+      return (
+        <div key={cat} className="category-with-delete">
+          <button
+            className={`toggle-btn ${isActive ? "active" : ""}`}
+            onClick={() => {
+              setIsCreatingNew(false);
+              setCategory(cat);
+            }}
+          >
+            {cat}
+          </button>
+          <button
+            className="category-delete-btn"
+            onClick={async (e) => {
+              e.stopPropagation();
+              if (!window.confirm(`Delete category "${cat}"? This will not delete pages.`)) return;
+              setCategories((prev) => prev.filter((c) => c !== cat));
+              if (category === cat) {
+                setCategory((prev) => (categories.length > 1 ? categories.find((c) => c !== cat) || "" : ""));
+              }
+            }}
+            title={`Delete ${cat}`}
+          >
+            ×
+          </button>
+        </div>
+      );
+    })}
+
+    <button
+      className={`toggle-btn ${isCreatingNew ? "active" : ""}`}
+      onClick={() => setIsCreatingNew(true)}
+    >
+      + Custom
+    </button>
+  </div>
             
             {isCreatingNew && (
-              <input 
-                className="custom-category-input"
-                placeholder="New category..."
-                value={customCategory}
-                onChange={(e) => setCustomCategory(e.target.value)}
-              />
+              <div className="custom-create-row">
+                <input
+                  className="custom-category-input"
+                  placeholder="New category..."
+                  value={customCategory}
+                  onChange={(e) => setCustomCategory(e.target.value)}
+                />
+                <button
+                  className="create-category-btn"
+                  onClick={() => {
+                    const trimmed = customCategory.trim();
+                    if (!trimmed) return;
+                    if (categories.some((c) => c.toLowerCase() === trimmed.toLowerCase())) {
+                      alert("Category already exists.");
+                      return;
+                    }
+                    setCategories((prev) => [...prev, trimmed]);
+                    setCategory(trimmed);
+                    setIsCreatingNew(false);
+                    setCustomCategory("");
+                  }}
+                  disabled={!customCategory.trim()}
+                >
+                  Create
+                </button>
+              </div>
             )}
           </div>
 
@@ -145,8 +181,33 @@ const WikiEditor = () => {
   }}
   disabled={!title || (isCreatingNew && !customCategory)}
 >
-  {selectedPageId ? "Update Wiki Page" : "Publish to Firebase"}
+<Icon 
+    icon={selectedPageId ? "ic:sharp-update" : "ic:baseline-publish"} 
+    width={20} height={20}
+    style={{ marginRight: "8px" }}
+  />
+  {selectedPageId ? "Update Page" : "Publish to Firebase"}
 </button>
+          <button
+            className="publish-toggle-btn"
+            onClick={async () => {
+              const page = pages.find((p) => p.id === selectedPageId);
+              if (!page) return;
+              const current = !!page.published;
+              try {
+                await updateDoc(doc(db, "wikiPages", selectedPageId), { published: !current });
+                const data = await fetchAllPages();
+                setPages(data);
+                alert(`Published set to ${!current}`);
+              } catch (e) {
+                console.error("Failed to toggle published:", e);
+              }
+            }}
+          >
+            <Icon icon="ic:baseline-visibility" width={20} height={20} style={{ marginRight: "8px" }} />
+            {pages.find((p) => p.id === selectedPageId)?.published ? "Unpublish" : "Set Published"}
+          </button>
+        
         {selectedPageId && (
           <button
             className="delete-btn"
@@ -163,6 +224,7 @@ const WikiEditor = () => {
               }
             }}
           >
+            <Icon icon="ic:baseline-delete-outline" width="24" height="24" style={{marginRight: "8px"}} />
             Delete Page
           </button>
         )}

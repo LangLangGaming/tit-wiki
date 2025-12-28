@@ -47,6 +47,30 @@ export const useWikiEditor = () => {
         }
       });
       editorInstance.current = editor;
+      // Paste handler: upload images from clipboard to Firebase Storage and insert as image blocks
+      const handlePaste = async (e) => {
+        if (!e.clipboardData || !editorInstance.current) return;
+        const items = Array.from(e.clipboardData.items || []);
+        const imageItems = items.filter(i => i.type && i.type.startsWith('image/'));
+        if (imageItems.length === 0) return; // nothing to do
+        e.preventDefault();
+        for (const item of imageItems) {
+          try {
+            const file = item.getAsFile();
+            if (!file) continue;
+            const storageRef = ref(storage, `wiki-images/pasted_${Date.now()}_${file.name || 'clipboard.png'}`);
+            await uploadBytes(storageRef, file);
+            const url = await getDownloadURL(storageRef);
+            await editorInstance.current.isReady;
+            // Insert image block using Image tool format
+            await editorInstance.current.blocks.insert('image', { file: { url } });
+          } catch (err) {
+            console.error('Failed to upload pasted image:', err);
+          }
+        }
+      };
+
+      document.addEventListener('paste', handlePaste);
     }
 
     return () => {
@@ -54,10 +78,12 @@ export const useWikiEditor = () => {
         editorInstance.current.destroy();
         editorInstance.current = null;
       }
+      // remove paste listener on cleanup
+      try { document.removeEventListener('paste', handlePaste); } catch (e) {}
     };
   }, []);
 
-  // --- NEW: Fetch all pages from Firestore ---
+
   const fetchAllPages = async () => {
     try {
       const querySnapshot = await getDocs(collection(db, "wikiPages"));
@@ -74,12 +100,12 @@ const loadContent = async (contentData) => {
   if (!editorInstance.current) return;
   try {
     let data;
-    // Check if it's already an object or a stringified JSON
+ 
     if (typeof contentData === 'string') {
       try {
         data = JSON.parse(contentData);
       } catch (e) {
-        // If parsing fails, it's a legacy plain string. Wrap it in a block.
+    
         data = {
           blocks: [{
             type: "paragraph",
@@ -97,46 +123,39 @@ const loadContent = async (contentData) => {
     console.error("Failed to load content:", e);
   }
 };
-  // --- UPDATED: onSave (Handles both Create and Update) ---
-  const onSave = async (title, category, existingId = null) => {
-    if (!editorInstance.current) return;
+const onSave = async (title, category, existingId = null) => {
+  if (!editorInstance.current) return;
 
-    try {
-      const editorData = await editorInstance.current.save();
+  try {
+    const editorData = await editorInstance.current.save();
 
-      if (!editorData.blocks || editorData.blocks.length === 0) {
-        alert("The editor is empty.");
-        return;
-      }
+    const slug = title.toLowerCase().trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-');
+    
+    const pageData = {
+      category: category.toLowerCase(), 
+      content: JSON.stringify(editorData),
+      slug: slug,
+      title: title,
+      updatedAt: serverTimestamp()
+    };
 
-      const slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, '').replace(/[\s_-]+/g, '-');
-      
-      const pageData = {
-        category: category.toLowerCase(), 
-        content: JSON.stringify(editorData),
-        slug: slug,
-        title: title,
-        updatedAt: serverTimestamp()
-      };
-
-      if (existingId) {
-        // UPDATE existing document
-        const docRef = doc(db, "wikiPages", existingId);
-        await updateDoc(docRef, pageData);
-        alert("Wiki page updated successfully!");
-      } else {
-        // CREATE new document
-        await addDoc(collection(db, "wikiPages"), {
-          ...pageData,
-          published: false,
-          createdAt: serverTimestamp()
-        });
-        alert("Wiki page published successfully!");
-      }
-    } catch (e) {
-      console.error("Save failed:", e);
+    if (existingId) {
+      const docRef = doc(db, "wikiPages", existingId);
+      await updateDoc(docRef, pageData);
+    } else {
+      await addDoc(collection(db, "wikiPages"), {
+        ...pageData,
+        published: true, 
+        createdAt: serverTimestamp()
+      });
     }
-  };
+    alert("Saved successfully!");
+  } catch (e) {
+    console.error("Save failed:", e);
+  }
+};
 
   // Make sure EVERYTHING is returned here
   return { onSave, fetchAllPages, loadContent };
