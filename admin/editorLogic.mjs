@@ -12,10 +12,11 @@ import {
   updateDoc, 
   serverTimestamp 
 } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 export const useWikiEditor = () => {
   const editorInstance = useRef(null);
+  const imagesRef = useRef(new Set());
 
   useEffect(() => {
     if (!editorInstance.current) {
@@ -47,6 +48,64 @@ export const useWikiEditor = () => {
         }
       });
       editorInstance.current = editor;
+      // track image URLs present in the editor so we can delete storage objects when removed
+      let changeTimer = null;
+      const urlToStoragePath = (url) => {
+        if (!url) return null;
+        try {
+          const m = url.match(/\/o\/([^?]+)/);
+          if (m && m[1]) return decodeURIComponent(m[1]);
+        } catch (e) { }
+        return null;
+      };
+
+      const detectRemovedImages = async () => {
+        if (!editorInstance.current) return;
+        try {
+          const data = await editorInstance.current.save();
+          const currentImages = new Set();
+          (data.blocks || []).forEach((b) => {
+            if (b.type === 'image' && b.data && b.data.file && b.data.file.url) {
+              currentImages.add(b.data.file.url);
+            }
+          });
+
+          const prev = imagesRef.current || new Set();
+          for (const url of prev) {
+            if (!currentImages.has(url)) {
+              // removed — delete from Firebase Storage if it looks like our uploaded path
+              try {
+                const storagePath = urlToStoragePath(url);
+                if (storagePath && storagePath.startsWith('wiki-images/')) {
+                  const storageRef = ref(storage, storagePath);
+                  await deleteObject(storageRef);
+                  console.log('Deleted removed image from storage:', storagePath);
+                }
+              } catch (delErr) {
+                console.warn('Failed to delete removed image:', delErr);
+              }
+            }
+          }
+
+          imagesRef.current = currentImages;
+        } catch (e) {
+          console.error('Failed to detect removed images:', e);
+        }
+      };
+
+      const scheduleDetect = () => {
+        if (changeTimer) clearTimeout(changeTimer);
+        changeTimer = setTimeout(detectRemovedImages, 800);
+      };
+
+      // EditorJS emits change events via editor.events
+      try {
+        editor.isReady.then(() => {
+          if (editor.events && typeof editor.events.on === 'function') {
+            editor.events.on('change', scheduleDetect);
+          }
+        });
+      } catch (e) { /* ignore if events API isn't available */ }
       // Paste handler: upload images from clipboard to Firebase Storage and insert as image blocks
       const handlePaste = async (e) => {
         if (!e.clipboardData || !editorInstance.current) return;
@@ -62,8 +121,9 @@ export const useWikiEditor = () => {
             await uploadBytes(storageRef, file);
             const url = await getDownloadURL(storageRef);
             await editorInstance.current.isReady;
-            // Insert image block using Image tool format
             await editorInstance.current.blocks.insert('image', { file: { url } });
+            // record the newly-inserted image URL
+            imagesRef.current.add(url);
           } catch (err) {
             console.error('Failed to upload pasted image:', err);
           }
@@ -119,6 +179,15 @@ const loadContent = async (contentData) => {
 
     await editorInstance.current.isReady;
     await editorInstance.current.render(data);
+    // update tracked images from the rendered content
+    try {
+      const blocks = data.blocks || [];
+      const imgs = new Set();
+      blocks.forEach((b) => {
+        if (b.type === 'image' && b.data && b.data.file && b.data.file.url) imgs.add(b.data.file.url);
+      });
+      imagesRef.current = imgs;
+    } catch (e) { imagesRef.current = new Set(); }
   } catch (e) {
     console.error("Failed to load content:", e);
   }
@@ -147,7 +216,7 @@ const onSave = async (title, category, existingId = null) => {
     } else {
       await addDoc(collection(db, "wikiPages"), {
         ...pageData,
-        published: true, 
+        published: false,
         createdAt: serverTimestamp()
       });
     }

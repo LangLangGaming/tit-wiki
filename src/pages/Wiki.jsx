@@ -1,88 +1,177 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../assets/css/Wiki.css';
+import '../assets/css/Wiki.overrides.css'
+import { db } from '../firebase.config.js';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 
-function Wiki() {
-  return (
-    <>
-      <div class="wiki-layout">
-
-        <aside class="wiki-sidebar">
-          <nav>
-            <h2>Organizations</h2>
-            <ul>
-              <li><a href="#">Central Atlantic Treaty Organization</a></li>
-              <li><a href="#">Association of Democratic Nations</a></li>
-              <li><a href="#">United Nations</a></li>
-            </ul>
-            <h2>Europe</h2>
-            <ul>
-              <li><a href="#">Germany</a></li>
-              <li><a href="#">French State</a></li>
-              <li><a href="#">United Kingdom</a></li>
-              <li><a href="#">Italy</a></li>
-              <li><a href="#">Spain</a></li>
-              <li><a href="#">Poland</a></li>
-            </ul>
-            <h2>Americas</h2>
-            <ul>
-              <li><a href="#">United States</a></li>
-              <li><a href="#">Edwardian Britain</a></li>
-              <li><a href="#">Mexico</a></li>
-              <li><a href="#">Quebec</a></li>
-            </ul>
-            <h2>Asia</h2>
-            <ul>
-              <li><a href="#">*Union of East Asian Republics</a></li>
-              <li><a href="#">South Japan</a></li>
-              <li><a href="#">North Japan</a></li>
-              <li><a href="#">Taiwan</a></li>
-              <li><a href="#">Malaysia</a></li>
-            </ul>
-
-
-          </nav>
-        </aside>
-
-        <main class="wiki-main">
-          <article class="wiki-content" id="wiki-renderer">
-            <h1>Germany</h1>
-            Germany,[d] officially the Federal Republic of Germany,[e] is a country in Western and Central Europe. It lies between the Baltic Sea and the North Sea to the north and the Alps to the south. Its sixteen constituent states have a total population of over 83 million, making it the most populous member state of the European Union. Germany borders Denmark to the north; Poland and the Czech Republic to the east; Austria and Switzerland to the south; and France, Luxembourg, Belgium, and the Netherlands to the west. The nation's capital and most populous city is Berlin and its main financial centre is Frankfurt; the largest urban area is the Ruhr.<br /> <br />
-Settlement in the territory of modern Germany began in the Lower Paleolithic, with various tribes inhabiting it from the Neolithic onward, chiefly the Celts, and Germanic tribes inhabiting the north. Romans named the area Germania. In 962, the Kingdom of Germany formed the bulk of the Holy Roman Empire. During the 16th century, northern German regions became the centre of the Protestant Reformation. Following the Napoleonic Wars and the dissolution of the Holy Roman Empire in 1806, the German Confederation was formed in 1815.<br /> <br />
-
-Unification of Germany into the modern nation-state, led by Prussia, established the German Empire in 1871. After World War I and a revolution, the Empire was replaced by the Weimar Republic. The Nazi rise to power in 1933 led to the establishment of a totalitarian dictatorship, World War II, and the Holocaust. In 1949, after the war and Allied occupation, Germany was organised into two separate polities with limited sovereignty: the Federal Republic of Germany (FRG), or West Germany, and the German Democratic Republic (GDR), or East Germany. The FRG was a founding member of the European Economic Community in 1951, while the GDR was a communist Eastern Bloc state and a founding member of the Warsaw Pact. After the fall of the communist led-government in East Germany, German reunification saw the former East German states join the FRG on 3 October 1990.<br /> <br />
-
-Germany is a developed country with a strong economy; it has the largest economy in Europe by nominal GDP. As a major force in several industrial, scientific and technological sectors, Germany is both the world's third-largest exporter and third-largest importer. Widely considered a great power, Germany is part of multiple international organisations and forums. It has the third-highest number of UNESCO World Heritage Sites: 55, of which 52 are cultural.<br /> <br />
-          </article>  
-        </main>
-         <aside className="toc-panel">
-    <div className="toc-header">
-      <h3>On this page</h3>
-    </div>
-
-    <nav className="toc-list">
-      <ul>
-        <li className="toc-item level-1">
-          <a href="#section-1">Section 1 Title</a>
-        </li>
-        <li className="toc-item level-2">
-          <a href="#subsection-1-1">Subsection 1.1 Title</a>
-        </li>
-        <li className="toc-item level-2">
-          <a href="#subsection-1-2">Subsection 1.2 Title</a>
-        </li>
-        <li className="toc-item level-1">
-          <a href="#section-2">Section 2 Title</a>
-        </li>
-        <li className="toc-item level-3">
-          <a href="#deep-3">Deep Level 3 Header</a>
-        </li>
-      </ul>
-    </nav>
-  </aside>
-      </div>
-      
-    </>
-  )
+function slugify(text) {
+  return String(text || '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^-\w\s-]/g, '')
+    .replace(/[-\s]+/g, '-');
 }
+
+function renderBlocks(blocks, pageSlug) {
+  if (!Array.isArray(blocks)) return null;
+  return blocks.map((b, i) => {
+    const key = `${pageSlug || 'p'}-block-${i}`;
+    switch (b.type) {
+      case 'header': {
+        const level = b.data.level || 2;
+        const Tag = `h${level}`;
+        const id = `${pageSlug || 'p'}-${slugify(b.data.text || '')}-${i}`;
+        return React.createElement(Tag, { id, key }, b.data.text);
+      }
+      case 'paragraph':
+        return (
+          <p key={key} dangerouslySetInnerHTML={{ __html: b.data.text || '' }} />
+        );
+      case 'list':
+        if (b.data.style === 'ordered') {
+          return (
+            <ol key={key}>
+              {(b.data.items || []).map((it, idx) => <li key={idx} dangerouslySetInnerHTML={{ __html: it }} />)}
+            </ol>
+          );
+        }
+        return (
+          <ul key={key}>
+            {(b.data.items || []).map((it, idx) => <li key={idx} dangerouslySetInnerHTML={{ __html: it }} />)}
+          </ul>
+        );
+      case 'image':
+        return (
+          <div className="wiki-image" key={key}>
+            <img src={b.data.file?.url} alt={b.data.caption || ''} />
+            {b.data.caption ? <div className="caption">{b.data.caption}</div> : null}
+          </div>
+        );
+      default:
+        return (
+          <pre key={key} className="wiki-unknown">{JSON.stringify(b, null, 2)}</pre>
+        );
+    }
+  });
+}
+
+const Wiki = () => {
+  const [pages, setPages] = useState([]);
+  const [grouped, setGrouped] = useState({});
+  const [activeSlug, setActiveSlug] = useState(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const q = query(collection(db, 'wikiPages'), where('published', '==', true), orderBy('title'));
+        let docs = [];
+        try {
+          const snap = await getDocs(q);
+          docs = snap.docs.map(d => {
+            const data = d.data();
+            const slug = data.slug || slugify(data.title || d.id);
+            return { id: d.id, ...data, slug };
+          });
+        } catch (queryErr) {
+          console.warn('Primary query failed, falling back to unfiltered fetch:', queryErr);
+          const snapAll = await getDocs(collection(db, 'wikiPages'));
+          const all = snapAll.docs.map(d => {
+            const data = d.data();
+            const slug = data.slug || slugify(data.title || d.id);
+            return { id: d.id, ...data, slug };
+          });
+          docs = all.filter(d => !!d.published);
+        }
+
+        console.log('Loaded wiki pages:', docs.length, docs.map(d => d.title));
+        setPages(docs);
+        if (docs.length && !activeSlug) setActiveSlug(docs[0].slug);
+        const g = docs.reduce((acc, p) => {
+          const cat = (p.category || 'uncategorized').toLowerCase();
+          acc[cat] = acc[cat] || [];
+          acc[cat].push(p);
+          return acc;
+        }, {});
+        setGrouped(g);
+      } catch (e) {
+        console.error('Failed to load wiki pages', e);
+      }
+    };
+    load();
+  }, []);
+
+  const handleNavClick = (e, page) => {
+    e.preventDefault();
+    const el = document.getElementById(page.slug);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    setActiveSlug(page.slug);
+  };
+
+  const tocFor = (page) => {
+    if (!page) return [];
+    let blocks = [];
+    try {
+      blocks = typeof page.content === 'string' ? JSON.parse(page.content).blocks : (page.content?.blocks || []);
+    } catch (e) { blocks = []; }
+    return blocks
+      .map((b, idx) => ({ ...b, _idx: idx }))
+      .filter(b => b.type === 'header')
+      .map(b => ({ text: b.data.text || '', level: b.data.level || 2, id: `${page.slug}-${slugify(b.data.text || '')}-${b._idx}` }));
+  };
+
+  const activePage = pages.find(p => p.slug === activeSlug) || pages[0];
+
+  return (
+    <div className="wiki-layout">
+      <aside className="wiki-sidebar">
+        <nav>
+          {Object.keys(grouped).length === 0 && <p>No published pages yet.</p>}
+          {Object.entries(grouped).map(([cat, list]) => (
+            <div key={cat} className="wiki-category">
+              <h2>{cat}</h2>
+              <ul>
+                {list.map(page => (
+                  <li key={page.id}>
+                    <a href={`#${page.slug}`} onClick={(e) => handleNavClick(e, page)}>{page.title}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      </aside>
+
+      <main className="wiki-main">
+        <div className="wiki-listing">
+          {activePage ? (() => {
+            let blocks = [];
+            try { blocks = typeof activePage.content === 'string' ? JSON.parse(activePage.content).blocks : (activePage.content?.blocks || []); } catch (e) { blocks = []; }
+            const id = activePage.slug || slugify(activePage.title) || activePage.id;
+            return (
+              <article className="wiki-content" id={id} key={activePage.id}>
+                <h1>{activePage.title}</h1>
+                {renderBlocks(blocks, id)}
+              </article>
+            );
+          })() : <p className="no-page">No page selected.</p>}
+        </div>
+      </main>
+
+      <aside className="toc-panel">
+        <div className="toc-header"><h3>On this page</h3></div>
+        <nav className="toc-list">
+          <ul>
+            {tocFor(activePage).map((t, idx) => (
+              <li key={idx} className={`toc-item level-${t.level}`}>
+                <a href={`#${t.id}`} onClick={(e) => { e.preventDefault(); const el = document.getElementById(t.id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}>{t.text}</a>
+              </li>
+            ))}
+            {tocFor(activePage).length === 0 && <li className="toc-empty">No headings</li>}
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  );
+};
 
 export default Wiki;

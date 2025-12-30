@@ -33,6 +33,7 @@ function SignIn() {
   useCloseDropdown(setOpen, !!user);
 
   if (user) {
+    console.log("uID:", user.uid);
     return (
       <div className="signin-wrapper">
         <button

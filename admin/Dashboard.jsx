@@ -186,7 +186,7 @@ const WikiEditor = () => {
     width={20} height={20}
     style={{ marginRight: "8px" }}
   />
-  {selectedPageId ? "Update Page" : "Publish to Firebase"}
+  {selectedPageId ? "Update Page" : "Upload to Firebase"}
 </button>
           <button
             className="publish-toggle-btn"
@@ -205,7 +205,7 @@ const WikiEditor = () => {
             }}
           >
             <Icon icon="ic:baseline-visibility" width={20} height={20} style={{ marginRight: "8px" }} />
-            {pages.find((p) => p.id === selectedPageId)?.published ? "Unpublish" : "Set Published"}
+            {pages.find((p) => p.id === selectedPageId)?.published ? "Unpublish" : "Publish"}
           </button>
         
         {selectedPageId && (
