@@ -21,16 +21,22 @@ export function AuthProvider({ children }) {
 
             // 1. Initial Claim Check
             const token = await currentUser.getIdTokenResult();
-            setUser({ ...currentUser, isAdmin: token.claims.admin === true });
+            console.log('Auth state changed - uid:', currentUser.uid, 'claims:', token.claims);
+            setUser({ ...currentUser, isAdmin: token.claims.admin === true, claims: token.claims });
+
+            // Listen for metadata doc changes; admin scripts write a refreshTime to this doc
             unsubscribeMetadata = onSnapshot(doc(db, "user_metadata", currentUser.uid), async (snapshot) => {
+                console.log('user_metadata snapshot for', currentUser.uid, snapshot.exists() ? snapshot.data() : 'no-doc');
                 if (snapshot.exists()) {
-                    console.log("Metadata change detected! Refreshing token...");
-                    
-                    // Force refresh fetches the NEW custom claims from Firebase servers
-                    await currentUser.getIdToken(true); 
-                    const newToken = await currentUser.getIdTokenResult();
-                    
-                    setUser({ ...currentUser, isAdmin: newToken.claims.admin === true });
+                    try {
+                        // Force refresh fetches the NEW custom claims from Firebase servers
+                        await currentUser.getIdToken(true);
+                        const newToken = await currentUser.getIdTokenResult();
+                        console.log('Token refreshed, new claims:', newToken.claims);
+                        setUser({ ...currentUser, isAdmin: newToken.claims.admin === true, claims: newToken.claims });
+                    } catch (err) {
+                        console.error('Failed to refresh token after metadata change:', err);
+                    }
                 }
             });
         });

@@ -2,10 +2,10 @@ import React from "react";
 import '../assets/css/Home.css';
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../assets/components/AuthContext.jsx";
+import Copyright from "../assets/components/Copyright";
+
 
 function Home() {
-
     return (
         <div className="home-page">
             <div className="title">
@@ -22,7 +22,7 @@ function Home() {
                     </a>
                 </div>
             </div>
-            <h1 className="copyright">Copyright © 2025 Talons in Twilight. All rights reserved.</h1>
+            <Copyright />
         </div>
     );
 }

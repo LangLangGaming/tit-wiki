@@ -3,6 +3,7 @@ import '../assets/css/Wiki.css';
 import '../assets/css/Wiki.overrides.css'
 import { db } from '../firebase.config.js';
 import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
+import Copyright from "../assets/components/Copyright.jsx";
 
 function slugify(text) {
   return String(text || '')

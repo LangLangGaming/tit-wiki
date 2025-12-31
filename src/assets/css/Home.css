@@ -78,18 +78,6 @@
     }
 }
 
-/* Copyright */
-.copyright {
-    position: absolute;
-    font-family: 'Open Sans', sans-serif;
-    bottom: 15px;
-    width: 100%;
-    text-align: center;
-    font-size: clamp(0.8rem, 2vw, 1.2rem);
-    color: #ccc;
-    z-index: 2;
-    font-weight: 400;
-}
 
 /* Mobile / Small Tablets */
 @media (max-width: 768px) {

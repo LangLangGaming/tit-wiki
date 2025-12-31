@@ -5,6 +5,7 @@ import { useWikiEditor } from "../admin/editorLogic.mjs";
 import { db } from "../src/firebase.config.js";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import {Icon } from '@iconify/react';
+import Copyright from "../src/assets/components/Copyright.jsx";
 
 const WikiEditor = () => {
   const [title, setTitle] = useState("");

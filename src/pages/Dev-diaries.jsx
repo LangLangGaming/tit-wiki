@@ -2,6 +2,7 @@ import React from "react";
 import '../assets/css/Dev-diaries.css';
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
+import Copyright from "../assets/components/Copyright";
 
 function DevDiaries() {
     return (
@@ -18,6 +19,7 @@ function DevDiaries() {
                         <Icon icon="streamline-logos:discord-logo-2-solid" width="30" height="30" />Join Discord</a>
                 </div>
             </div>
+            <Copyright />
         </>
     )
 }
