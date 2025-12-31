@@ -7,10 +7,15 @@
 /* APP LAYOUT STYLING   */
 /* ==================== */
 
+:root {
+  --navbar-height: 80px;
+  --footer-height: 72px; /* matches site-footer padding/height */
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - var(--navbar-height));
+  min-height: 100vh;
   background-color: var(--bg-color);
   color: var(--text-color);
 }
@@ -22,6 +27,11 @@
 .main-content {
   flex: 1;
   padding: 2rem 0;
+}
+
+/* Page container: reserve space for navbar and footer so internal centering uses the available area */
+.page-container {
+  min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
 }
 
 .container {

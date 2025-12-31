@@ -4,8 +4,6 @@
     min-height: calc(100vh - var(--navbar-height));
     width: 100%;
     overflow: hidden;
-    background: url("../Background.png") center/cover no-repeat;
-    background-size: cover;
 }
 
 /* FULL-SCREEN overlay */
@@ -16,6 +14,12 @@
     background: rgba(0, 0, 50, 0.55);
     backdrop-filter: blur(6px);
     z-index: 1;
+}
+
+/* background image for home lives here so footer and other pages aren't affected */
+.home-page {
+    background: url("../Background.png") center/cover no-repeat;
+    background-size: cover;
 }
 
 /* Centered title block */

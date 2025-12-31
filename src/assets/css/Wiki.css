@@ -61,7 +61,7 @@
 /* Content wrapper */
 .wiki-content {
   width: 100%;
-  max-width: 100%;
+  max-width: 100%;  
   font-size: 1.47rem;
   font-family: 'Nunito Sans', sans-serif;
   color: var(--text-color);
@@ -169,10 +169,12 @@
 /* Indentation for different heading levels */
 .toc-item.level-1 {
   padding-left: 0;
+  color: red;  
 }
 
 .toc-item.level-2 {
   padding-left: 1rem;
+  color: var(--link-color);
 }
 
 .toc-item.level-3 {
@@ -181,7 +183,7 @@
 
 @media screen and (max-width: 900px) {
 
-  /* Layout becomes vertical */
+  /* Layout becomes vertical  */
   .wiki-layout {
     flex-direction: column;
   }

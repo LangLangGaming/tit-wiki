@@ -20,7 +20,6 @@ function Credits() {
                         <Icon icon="streamline-logos:discord-logo-2-solid" width="30" height="30" />Join Discord</a>
                 </div>
             </div>
-            <Copyright />
         </>
     )
 }

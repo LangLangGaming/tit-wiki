@@ -1,11 +1,26 @@
-.copyright {
-    position: absolute;
-    font-family: 'Open Sans', sans-serif;
-    bottom: 15px;
+.site-footer {
     width: 100%;
-    text-align: center;
-    font-size: clamp(0.8rem, 2vw, 1.2rem);
-    color: #ccc;
-    z-index: 2;
-    font-weight: 400;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, rgba(6,12,34,0.95) 0%, rgba(8,20,46,1) 100%);
+    padding: 18px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copyright {
+        display: block;
+        font-family: 'Open Sans', sans-serif;
+        max-width: 1100px;
+        text-align: center;
+        font-size: clamp(0.8rem, 1.6vw, 1.1rem);
+        color: #dfeeff;
+        font-weight: 400;
+        margin: 0;
+}
+
+/* Keep mobile spacing */
+@media (max-width: 600px) {
+    .site-footer { padding: 14px 8px; }
+    .copyright { font-size: 0.9rem; }
 }

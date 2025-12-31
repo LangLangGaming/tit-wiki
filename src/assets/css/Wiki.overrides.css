@@ -35,6 +35,14 @@
   z-index: 10 !important;
 }
 
+/* Make second-level TOC items a different color */
+.toc-item.level-2 a {
+  color: #7ec8ff !important;
+  font-weight: 600 !important;
+}
+.toc-header h3 {
+  font-weight: 600 !important;
+}
 /* Ensure mobile behavior isn't broken: revert the overrides for small screens */
 @media screen and (max-width: 900px) {
   .wiki-sidebar {

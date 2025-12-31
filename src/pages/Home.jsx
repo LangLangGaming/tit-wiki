@@ -22,7 +22,6 @@ function Home() {
                     </a>
                 </div>
             </div>
-            <Copyright />
         </div>
     );
 }
