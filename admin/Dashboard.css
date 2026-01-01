@@ -1,25 +1,31 @@
 
-
 /* --- 1. CORE LAYOUT --- */
 .wiki-container-layout {
-  display: flex;
-  padding-top: 20px;
-  background: rgb(5, 10, 26) ; /* Match the editor background */
-  color: white;
-  height: 100vh;
+    display: flex;
+    flex: 1;
+    align-items: flex-start; /* CRITICAL: Prevents sidebar from stretching with content */
+    padding-top: 20px;
+    background: rgb(5, 10, 26);
+    color: white;
+    min-height: calc(100vh - 120px); 
 }
 
 /* --- 2. SIDEBAR --- */
 .editor-sidebar {
-  width: 300px;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-direction: column;
-  background: rgba(255, 255, 255, 0.02);
+    width: 300px;
+    flex: 0 0 300px;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    
+    /* Sticky Logic - This locks it to the viewport */
+    position: sticky;
+    top: 0; /* Change this to the height of your Navbar (e.g., 60px) if it overlaps */
+    height: 100vh; 
+    
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Sidebar gets its own scrollbar only if items overflow it */
 }
-/* Keep sidebar fixed width and prevent it from shrinking when main content grows */
-.editor-sidebar { flex: 0 0 300px; }
-
 .sidebar-header {
   padding: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -45,8 +51,6 @@
 }
 
 .page-list {
-  flex-grow: 1;
-  overflow-y: auto;
   padding: 10px;
 }
 
@@ -87,11 +91,12 @@
 
 /* --- 3. MAIN EDITOR WRAPPER --- */
 .wiki-editor-wrapper {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 20px 40px;
-  overflow-y: auto;
+    flex: 1;
+    /* Removed min-height: 100% to allow natural document growth */
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    min-width: 0; 
 }
 /* Allow the editor area to shrink and avoid forcing the whole page wider */
 .wiki-editor-wrapper { min-width: 0; overflow-x: auto; }

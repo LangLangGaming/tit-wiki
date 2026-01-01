@@ -21,7 +21,12 @@
 }
 
 /* ensure root elements have full height so children can use 100% reliably */
-html, body, #root { height: 100%; }
+html, body, #root { 
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+ }
 
 /* ===================== */
 /* BODY & GLOBAL STYLES  */

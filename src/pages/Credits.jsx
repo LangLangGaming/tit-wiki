@@ -2,7 +2,6 @@ import React from "react";
 import '../assets/css/Credits.css';
 import { Icon } from "@iconify/react";
 import { Link } from "react-router-dom";
-import Copyright from "../assets/components/Copyright";
 
 function Credits() {
     return (
