@@ -7,6 +7,6 @@ function Copyright() {
         <h1 className="copyright">Copyright © 2026 Loredadmedia. All rights reserved.</h1>
         </>
     );
-}
+}           `       `
 
-export default Copyright;
+export default Copyright;   
