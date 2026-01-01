@@ -7,23 +7,31 @@ import Credits from './pages/Credits.jsx'
 import Home from './pages/Home.jsx'
 import DevDiaries from './pages/Dev-diaries.jsx'
 import Dashboard from '../admin/Dashboard.jsx'
+import Copyright from './assets/components/Copyright.jsx'
 
 function App() {
 
   return (
     <>
-        <Router>
-      <Navbar />
+      <Router>
+        <div className="app-container">
+          <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/wiki" element={<Wiki />} />
-        <Route path="/credits" element={<Credits />} />
-        <Route path="/dev-diaries" element={<DevDiaries />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </Router>
-    
+          <div className="page-container">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/wiki" element={<Wiki />} />
+              <Route path="/credits" element={<Credits />} />
+              <Route path="/dev-diaries" element={<DevDiaries />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+          </div>
+
+          <footer className="site-footer">
+            <Copyright />
+          </footer>
+        </div>
+      </Router>
     </>
   )
 }

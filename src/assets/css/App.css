@@ -28,8 +28,12 @@
   width: 90%;
   max-width: var(--max-width);
   margin: 0 auto;
+  overflow-y: auto
 }
 
+.page-container {
+flex: 1;
+}
 /* ==================== */
 /* FOOTER               */
 /* ==================== */

@@ -1,18 +1,24 @@
-/* Full-page background */
 .home-page {
-    position: relative;
-    min-height: calc(100vh - var(--navbar-height));
+    flex: 1;
     width: 100%;
-    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* Remove justify-content: center; */
+    align-items: center; 
+    
+    /* Use 'vh' to ensure it takes up the screen, but subtract enough for footer/nav */
+    min-height: calc(100vh - 120px); 
+    
     background: url("../Background.png") center/cover no-repeat;
-    background-size: cover;
+    overflow: hidden;
 }
 
 /* FULL-SCREEN overlay */
 .home-page::before {
     content: "";
     position: absolute;
-    inset: 0;
+    inset: 0; /* Stays within the bounds of .home-page */
     background: rgba(0, 0, 50, 0.55);
     backdrop-filter: blur(6px);
     z-index: 1;
@@ -20,13 +26,11 @@
 
 /* Centered title block */
 .title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    z-index: 2; /* Ensures it sits above the background overlay */
     width: min(900px, 90%);
     text-align: center;
-    z-index: 2;
+   
 }
 
 /* Heading */
@@ -36,7 +40,7 @@
     font-family: 'Open Sans', sans-serif;
     font-weight: 800;
     margin: 0 0 0.2rem 0;
-    line-height: 1
+    line-height: 1;
 }
 
 /* Paragraph */
