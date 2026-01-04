@@ -2,10 +2,10 @@
 /* GLOBAL RESET    */
 /* =============== */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 /* =============== */
@@ -56,7 +56,7 @@ background-attachment: fixed;
   line-height: 1.6;
   min-height: 100%;
   /* ensure content is pushed below a fixed navbar */
-  padding-top: var(--navbar-height);
+  padding-top: 0;
 }
 
 /* ===================== */

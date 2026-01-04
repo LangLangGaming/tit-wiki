@@ -26,3 +26,7 @@ dist-ssr
 # Firebase admin tools
 admin-tools/
 serviceAccountKey.json
+
+.codelineignore
+.VSCodeCounter/
+

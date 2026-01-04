@@ -70,16 +70,38 @@ const WikiEditor = () => {
           </button>
         </div>
         <nav className="page-list">
-          {pages.map((page) => (
-            <button
-              key={page.id}
-              className={`sidebar-item ${selectedPageId === page.id ? "active" : ""}`}
-              onClick={() => handleSelectPage(page.id)}
-            >
-              <span className="item-title">{page.title}</span>
-              <span className="item-meta">{page.category}</span>
-            </button>
-          ))}
+          {pages.length === 0 && <p>No pages yet.</p>}
+          {(() => {
+            const grouped = pages.reduce((acc, p) => {
+              const raw = p.category || "Other";
+              const key = raw.charAt(0).toUpperCase() + raw.slice(1);
+              acc[key] = acc[key] || [];
+              acc[key].push(p);
+              return acc;
+            }, {});
+
+            // Keep categories ordering consistent with the editor's category list
+            const orderedCats = [...categories.filter(c => grouped[c]), ...Object.keys(grouped).filter(k => !categories.includes(k))];
+
+            return orderedCats.map((cat) => (
+              <div key={cat} className="sidebar-category">
+                <h4 className="sidebar-category-title">{cat}</h4>
+                <ul className="category-pages">
+                  {grouped[cat].map((page) => (
+                    <li key={page.id}>
+                      <button
+                        className={`sidebar-item ${selectedPageId === page.id ? "active" : ""}`}
+                        onClick={() => handleSelectPage(page.id)}
+                      >
+                        <span className="item-title">{page.title}</span>
+                        <span className="item-meta">{page.published ? "Published" : "Draft"}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ));
+          })()}
         </nav>
       </aside>
       <div className="wiki-editor-wrapper">

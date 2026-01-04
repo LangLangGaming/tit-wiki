@@ -8,14 +8,15 @@
 /* ==================== */
 
 :root {
-  --navbar-height: 80px;
+  --navbar-height: 72px;
   --footer-height: 72px; /* matches site-footer padding/height */
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  /* keep the navbar space inside the app container so body doesn't overflow */
+  padding-top: var(--navbar-height);
   background-color: var(--bg-color);
   color: var(--text-color);
 }

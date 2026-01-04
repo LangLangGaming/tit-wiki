@@ -1,19 +1,14 @@
+
 .home-page {
-    flex: 1;
     width: 100%;
+    /* Use grid for the most "forceful" centering available */
+    display: grid;
+    place-items: center; 
+    min-height: calc(100vh - var(--navbar-height) - var(--footer-height));
     position: relative;
-    display: flex;
-    flex-direction: column;
-    /* Remove justify-content: center; */
-    align-items: center; 
-    
-    /* Use 'vh' to ensure it takes up the screen, but subtract enough for footer/nav */
-    min-height: calc(100vh - 120px); 
-    
     background: url("../Background.png") center/cover no-repeat;
     overflow: hidden;
 }
-
 /* FULL-SCREEN overlay */
 .home-page::before {
     content: "";
@@ -24,23 +19,21 @@
     z-index: 1;
 }
 
-/* background image for home lives here so footer and other pages aren't affected */
-.home-page {
-    background: url("../Background.png") center/cover no-repeat;
-    background-size: cover;
-}
+/* removed duplicate .home-page background rule to avoid conflicting overrides */
 
-/* Centered title block */
-.title {
-    position: relative;
-    z-index: 2; /* Ensures it sits above the background overlay */
-    width: min(900px, 90%);
+/* Centered title block (scoped to home) */
+.home-page .title {
+    z-index: 3;
+    width: min(900px, 95%);
+    /* Reset margins so they don't fight the grid centering */
+    margin: 0; 
     text-align: center;
-   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-
 /* Heading */
-.title h1 {
+.home-page .title h1 {
     font-size: clamp(2rem, 5vw, 4rem);
     color: #fff;
     font-family: 'Open Sans', sans-serif;
@@ -50,14 +43,19 @@
 }
 
 /* Paragraph */
-.title p {
-    font-size: clamp(1rem, 2.5vw, 1.67rem);
-    color: var(--text-color);
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 500;
-    line-height: 1.5;
+.home-page .title p {
     width: 100%;
-    margin: 0.75rem auto 0 auto;
+    text-align: center !important;
+    margin: 1rem auto 0 auto !important;
+}
+
+.button-wrapper {
+display: flex;
+    justify-content: center;
+    gap: 20px; /* This controls the space between buttons perfectly */
+    margin-top: 30px;
+    width: 100%;
+    flex-wrap: wrap; /* Keeps it responsive on mobile */
 }
 
 /* Wiki Button */
@@ -68,16 +66,12 @@
     color: #202020;
     background-color: #1A73E8;
     border-radius: 15px;
-    font-size: clamp(1rem, 2.8vw, 1.6rem);
-    font-family: 'Open Sans', sans-serif;
     font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.15s ease;
-    white-space: nowrap;
-    min-width: 150px;
     padding: 12px 24px;
-    margin: 20px auto 0 auto;
     gap: 10px;
+    /* REMOVED: margin: auto which was causing the shift and gaps */
+    margin: 0 !important; 
+    text-decoration: none;
 }
 
 /* Hover effect (desktop only) */

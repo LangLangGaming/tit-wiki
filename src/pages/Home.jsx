@@ -11,7 +11,7 @@ function Home() {
             <div className="title">
                 <h1>Two Minutes to Midnight</h1>
                 <p>Talons in Twilight is a Hearts of Iron IV Mod where a German Republic led Democratic Faction attempts to resist the crypto-fascist USA and their aims to become the dominant nation of the world, while both simultaneously seek to keep the communists of East Asia contained</p>
-                <div>
+                <div className="button-wrapper">
                     <Link className="wiki-button" to="/wiki">
                         <Icon icon="ci:globe" width="30" height="30" />
                         Read the Wiki

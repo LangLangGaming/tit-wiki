@@ -55,11 +55,13 @@
 }
 
 .sidebar-item {
-  display: flex;
+  text-align: left;
+    display: flex;
   flex-direction: column;
   width: 100%;
   padding: 12px;
   margin-bottom: 5px;
+  margin-left: 20px;
   border: none;
   background: transparent;
   border-radius: 8px;
@@ -87,6 +89,28 @@
   color: #1a73e8;
   text-transform: uppercase;
   margin-top: 4px;
+}
+
+/* Grouped sidebar category styles */
+.sidebar-category {
+  margin-bottom: 12px;
+}
+.sidebar-category-title {
+  font-size: 1.4rem;
+  margin-bottom: 1px;
+  margin-left: 15px;
+  font-family: 'Intel One Mono', monospace;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--link-color)
+}
+.category-pages {
+  list-style: none;
+  padding: 0 6px 8px 6px;
+  margin: 0;
+}
+.category-pages li {
+  margin-bottom: 6px;
 }
 
 /* --- 3. MAIN EDITOR WRAPPER --- */
