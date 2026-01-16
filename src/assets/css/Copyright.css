@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 18px 12px;
+    padding: 20px;
     background: linear-gradient(180deg, rgba(6,12,34,0.9) 0%, rgba(8,20,46,0.98) 100%);
     position: static;
     z-index: 9999; /* ensure it appears above page overlays */
@@ -17,7 +17,7 @@
         max-width: 1100px;
         text-align: center;
         align-items: center;
-        font-size: clamp(0.8rem, 1.6vw, 1.1rem);
+        font-size: clamp(0.8rem, 1.6vw, 1.4rem);
         color: #dfeeff;
         font-weight: 400;
         margin: 0;
