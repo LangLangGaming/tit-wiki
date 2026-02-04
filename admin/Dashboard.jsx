@@ -6,6 +6,7 @@ import { db } from "../src/firebase.config.js";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import {Icon } from '@iconify/react';
 import Copyright from "../src/assets/components/Copyright.jsx";
+import Loading from "../src/assets/components/Loading.jsx";
 
 const WikiEditor = () => {
   const [title, setTitle] = useState("");
@@ -16,6 +17,7 @@ const WikiEditor = () => {
 
   const [pages, setPages] = useState([]);
   const [selectedPageId, setSelectedPageId] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const initialCategories = ["Organizations", "Europe", "Asia", "Americas", "Africa", "Oceania", "Other"];
   const [categories, setCategories] = useState(initialCategories);
@@ -25,8 +27,10 @@ const WikiEditor = () => {
       try {
         const data = await fetchAllPages();
         setPages(data);
+        setLoading(false);
       } catch (err) {
         console.error("Failed to fetch pages:", err);
+        setLoading(false);
       }
     };
     getExistingPages();
@@ -59,6 +63,7 @@ const WikiEditor = () => {
 
   return (
     <div className="wiki-container-layout">
+      {loading && <Loading />}
       <aside className="editor-sidebar">
         <div className="sidebar-header">
           <h3>Page List</h3>
@@ -135,7 +140,7 @@ const WikiEditor = () => {
             }}
             title={`Delete ${cat}`}
           >
-            ×
+            
           </button>
         </div>
       );

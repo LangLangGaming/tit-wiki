@@ -4,6 +4,7 @@ import '../assets/css/Wiki.overrides.css'
 import { db } from '../firebase.config.js';
 import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 import Copyright from "../assets/components/Copyright.jsx";
+import Loading from "../assets/components/Loading.jsx";
 
 function slugify(text) {
   return String(text || '')
@@ -60,6 +61,7 @@ const Wiki = () => {
   const [pages, setPages] = useState([]);
   const [grouped, setGrouped] = useState({});
   const [activeSlug, setActiveSlug] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
@@ -94,8 +96,10 @@ const Wiki = () => {
           return acc;
         }, {});
         setGrouped(g);
+        setLoading(false);
       } catch (e) {
         console.error('Failed to load wiki pages', e);
+        setLoading(false);
       }
     };
     load();
@@ -124,6 +128,7 @@ const Wiki = () => {
 
   return (
     <div className="wiki-layout">
+      {loading && <Loading />}
       <aside className="wiki-sidebar">
         <nav>
           {Object.keys(grouped).length === 0 && <p>No published pages yet.</p>}
