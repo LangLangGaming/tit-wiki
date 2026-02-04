@@ -4,9 +4,10 @@ import '../css/Copyright.css';
 function Copyright() {
     return (
         <>
+        <h1 className="copyright">Talons in Twilight Website v0.1.3</h1>
         <h1 className="copyright">Copyright © 2026 Loredadmedia. All rights reserved.</h1>
         </>
     );
-}           `       `
+}           `       `   
 
 export default Copyright;   

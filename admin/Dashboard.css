@@ -12,8 +12,8 @@
 
 /* --- 2. SIDEBAR --- */
 .editor-sidebar {
-    width: 300px;
-    flex: 0 0 300px;
+    width: 100%;
+    flex: 0 0 350px;
     border-right: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.02);
     
@@ -67,6 +67,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.2s;
+  color: white;
 }
 
 .sidebar-item:hover {
@@ -163,7 +164,8 @@
   display: inline-flex;
   align-items: center;
   background-color: whitesmoke;
-  font-size: 1.3rem
+  font-size: 1.3rem;
+  gap: 5px;
 }
 
 .category-with-delete {
@@ -311,7 +313,8 @@
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  font-size: 1.3rem
+  font-size: 1.3rem;
+  gap: 5px;
 }
 
 .publish-btn:disabled {
@@ -331,6 +334,7 @@
   margin-left: 10px;
   display: inline-flex;
   align-items: center;
-  font-size: 1.3rem
+  font-size: 1.3rem;
+  gap: 5px;
 }
 
