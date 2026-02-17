@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 {
   "name": "talons-in-twilight",
   "private": true,
@@ -37,6 +37,7 @@
     "vite": "^7.1.7"
   }
 }
+
 =======
 {
   "name": "talons-in-twilight",
@@ -78,5 +79,4 @@
     "tailwindcss": "^3.4.19",
     "vite": "^7.1.7"
   }
-}
->>>>>>> f644e1db94e6dc260bd97c32ab2c0cdf0125c00d
+} 
