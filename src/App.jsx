@@ -8,8 +8,14 @@ import Home from './pages/Home.jsx'
 import DevDiaries from './pages/Dev-diaries.jsx'
 import Dashboard from '../admin/Dashboard.jsx'
 import Copyright from './assets/components/Copyright.jsx'
+import { useEffect } from 'react'
 
 function App() {
+  useEffect(() => {
+    // Force the document to ignore system dark mode
+    document.documentElement.classList.remove('dark');
+    document.documentElement.style.colorScheme = 'light';
+  }, []);
 
   return (
     <>
