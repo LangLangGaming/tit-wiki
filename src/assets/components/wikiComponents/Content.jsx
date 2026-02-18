@@ -1,6 +1,8 @@
 import React from 'react';
 import { renderBlocks } from './Renderer.jsx';
 import { slugify } from './Utils.js';
+import '../../css/Wiki.css';
+import '../../css/Wiki.overrides.css';
 
 
 function Content({ activePage }) {

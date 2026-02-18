@@ -71,3 +71,26 @@
 .ce-inline-tool:hover {
   opacity: 0.7 !important;
 }
+
+/* Heading Styles - Editor Content */
+.ce-header {
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  margin: 0.5em 0 !important;
+  color: #ffffff !important;
+}
+
+.ce-header[data-level="2"] {
+  font-size: 1.75rem !important;
+}
+
+.ce-header[data-level="3"] {
+  font-size: 1.35rem !important;
+  font-weight: 600 !important;
+  color: #e5e7eb !important;
+}
+
+/* Override parent container font-size for headers */
+.editor-content .ce-header {
+  font-size: inherit !important;
+}

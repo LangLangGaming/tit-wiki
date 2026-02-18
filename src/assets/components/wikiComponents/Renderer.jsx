@@ -1,5 +1,7 @@
 import React from 'react';
 import { slugify } from './Utils.js';
+import '../../css/Wiki.css';
+import '../../css/Wiki.overrides.css';
 function renderBlocks(blocks, pageSlug) {
   if (!Array.isArray(blocks)) return null;
   return blocks.map((b, i) => {

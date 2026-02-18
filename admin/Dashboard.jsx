@@ -9,6 +9,7 @@ import CategoryBar from "./editorComponents/CategoryBar";
 import ActionFooter from "./editorComponents/ActionFooter";
 import Loading from "../src/assets/components/Loading.jsx";
 import "./Dashboard.css";
+import "./Editor.css";
 
 const Dashboard = () => {
   const [title, setTitle] = useState("");
