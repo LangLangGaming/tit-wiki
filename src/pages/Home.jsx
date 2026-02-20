@@ -6,7 +6,7 @@ import Copyright from "../assets/components/Copyright";
 
 function Home() {
     return (
-        <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white relative">
+        <div className="flex items-center justify-center h-full text-white relative overflow-hidden">
             <div className="absolute inset-0 bg-black/30 backdrop-blur-sm z-0"></div>
             <div className="relative z-10 flex flex-col items-center text-center w-[min(900px,95%)]">
                 <h1 className="font-open-sans font-bold text-[clamp(2rem,5vw,4rem)] leading-tight mb-2">Two Minutes to Midnight</h1>
@@ -24,6 +24,9 @@ function Home() {
                     </a>
                 </div>
             </div>
+            <footer className="fixed bottom-0 left-0 right-0 w-full flex flex-col items-center justify-center p-4">
+                <Copyright />
+            </footer>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import React from "react";
 function Rightbar({ activePage, tocFor }) {
 
     return (
-        <aside className="w-72 sticky top-0 h-screen overflow-y-auto bg-slate-800 border-l border-slate-700 p-4">
+        <aside className="w-72 sticky top-0 h-screen overflow-y-auto border-l border-slate-700 p-4">
             <div className="mb-6"><h3 className="text-lg font-intel-mono font-normal text-blue-400 uppercase mb-4">On this page</h3></div>
             <nav>
                 <ul className="space-y-2">

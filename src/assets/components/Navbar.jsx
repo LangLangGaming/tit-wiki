@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
     return (
         <>
-            <nav className="fixed top-0 left-0 w-full h-[72px] flex items-center justify-between px-4 z-[10000] bg-slate-900">
+            <nav className="fixed top-0 left-0 w-full h-[72px] flex items-center justify-between px-4 z-[10000] bg-slate-950 border-b border-slate-900"   >
                 <div className="flex items-center gap-4">
                     <img src={Logo} alt="Logo" className="logo-image" width="72" height="12" />
                     <h1 className="font-black-ops text-2xl font-light">

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Credits() {
     return (
-        <div className="flex items-center justify-center min-h-screen bg-slate-900 text-white">
+        <div className="flex items-center justify-center min-h-screen text-white">
             <div className="flex flex-col items-center text-center w-[min(900px,90%)]">
                 <h1 className="font-open-sans font-bold text-[clamp(2rem,5vw,4rem)] leading-tight mb-2">Not Available</h1>
                 <p className="font-open-sans text-[clamp(1rem,2.5vw,1.67rem)] font-medium leading-relaxed mb-8">

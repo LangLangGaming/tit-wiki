@@ -1,43 +1,45 @@
 import { useState } from 'react'
 import Navbar from './assets/components/Navbar'
-import { BrowserRouter as Router, Routes, Route } from 'react-router'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router'
 import Wiki from './pages/Wiki.jsx'
 import Credits from './pages/Credits.jsx'
 import Home from './pages/Home.jsx'
 import DevDiaries from './pages/Dev-diaries.jsx'
 import Dashboard from '../admin/Dashboard.jsx'
 import Copyright from './assets/components/Copyright.jsx'
-import { useEffect } from 'react'
 
-function App() {
-  useEffect(() => {
-    // Force the document to ignore system dark mode
-    document.documentElement.classList.remove('dark');
-    document.documentElement.style.colorScheme = 'light';
-  }, []);
+function AppContent() {
+  const location = useLocation()
 
   return (
     <>
-      <Router>
-        <div className="flex flex-col min-h-screen pt-[72px]">
-          <Navbar />
+      <Navbar />
+      <div className="flex bg-slate-950 flex-col h-screen pt-20">
+        <div className="flex-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/wiki" element={<Wiki />} />
+            <Route path="/credits" element={<Credits />} />
+            <Route path="/dev-diaries" element={<DevDiaries />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </div>
 
-          <div className="flex-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/wiki" element={<Wiki />} />
-              <Route path="/credits" element={<Credits />} />
-              <Route path="/dev-diaries" element={<DevDiaries />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Routes>
-          </div>
-
-          <footer className="w-full flex flex-col items-center justify-center p-4">
+        {location.pathname !== '/' && (
+          <footer className="w-full flex flex-col items-center justify-center p-4 bg-slate-950">
             <Copyright />
           </footer>
-        </div>
-      </Router>
+        )}
+      </div>
     </>
+  )
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   )
 }
 
