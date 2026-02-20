@@ -1,11 +1,10 @@
 import react from 'react';
-import '../css/Copyright.css';
 
 function Copyright() {
     return (
         <>
-        <h1 className="copyright">Talons in Twilight Website v0.1.4</h1>
-        <h1 className="copyright">Copyright © 2026 Loredadmedia. All rights reserved.</h1>
+            <h1 className="text-gray-300 font-open-sans text-center">Talons in Twilight Website v0.1.4</h1>
+            <h1 className="text-gray-300 font-open-sans text-center">Copyright © 2026 Loredadmedia. All rights reserved.</h1>
         </>
     );
 }   

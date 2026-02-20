@@ -1,81 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Intel+One+Mono:ital,wght@0,300..700;1,300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* =============== */
-/* GLOBAL RESET    */
-/* =============== */
-
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-/* =============== */
-/* ROOT VARIABLES  */
-/* =============== */
-
-:root {
-  --text-color: rgb(246,246,246) !important;
-  --accent-color: #e63946 !important  ;
-  --link-color: #4dabf7 !important;
-  --font-main: 'Inter', system-ui, sans-serif;
-  --max-width: 1200px;
-  color-scheme: light !important;;
-}
-
-/* ensure root elements have full height so children can use 100% reliably */
-html, body, #root { 
-  height: 100%;
+/* Minimal global reset */
+* {
   margin: 0;
   padding: 0;
-  overflow-y: auto;
- }
-
-/* ===================== */
-/* BODY & GLOBAL STYLES  */
-/* ===================== */
-
-html {
-  /* reduce base font-size to scale UI down by 20% in a layout-safe way */
-  font-size: 12.8px; /* 16px * 0.8 */
-  scroll-behavior: smooth;
+  box-sizing: border-box;
 }
 
-/* navbar spacing variable */
-:root {
-  --navbar-height: 72px;
+html, body, #root {
+  height: 100%;
 }
 
 body {
-  background: 
-    linear-gradient(90deg, rgb(5, 10, 26), rgb(8, 20, 70));
-background-blend-mode: multiply;
-background-repeat: no-repeat;
-background-size: cover;
-background-position: center;
-background-attachment: fixed;
-  color: var(--text-color);
-  font-family: var(--font-main);
   line-height: 1.6;
-  min-height: 100%;
-  /* ensure content is pushed below a fixed navbar */
-  padding-top: 0;
-}
-
-/* ===================== */
-/* GLOBAL ELEMENT STYLES */
-/* ===================== */
-
-a {
-  color: var(--link-color);
-  text-decoration: none;
-  transition: 0.2s ease;
-}
-
-a:hover {
-  opacity: 0.85;
 }
 
 img {
@@ -86,64 +33,4 @@ img {
 
 ul {
   list-style: none;
-}
-
-/* ===================== */
-/* GLOBAL LAYOUT HELPERS */
-/* ===================== */
-
-.container {
-  width: 90%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
-
-button {
-  font-family: var(--font-main);
-  border: none;
-  cursor: pointer;
-  padding: 0.6rem 1.2rem;
-  border-radius: 6px;
-  transition: 0.2s ease;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-/* ===================== */
-/* RESPONSIVENESS        */
-/* ===================== */
-
-@media (max-width: 768px) {
-  html {
-    font-size: 15px;
-  }
-
-  .container {
-    width: 95%;
-  }
-
-  button {
-    padding: 0.5rem 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  html {
-    font-size: 14px;
-  }
-
-  body {
-    line-height: 1.5;
-  }
-}
-
-/* Disable global scaling on small screens for readability */
-@media (max-width: 768px) {
-  :root { --navbar-height: 56px; }
-  html {
-    font-size: 16px;
-  }
-
 }

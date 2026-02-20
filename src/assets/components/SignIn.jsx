@@ -1,5 +1,4 @@
 import React from "react";
-import '../css/SignIn.css';
 import { useState, useEffect } from "react"; // Combined imports
 import { Icon } from "@iconify/react";
 import { auth } from "../../firebase.config.js";
@@ -35,9 +34,9 @@ function SignIn() {
   if (user) {
     console.log("uID:", user.uid);
     return (
-      <div className="signin-wrapper">
+      <div className="signin-wrapper relative inline-block w-fit">
         <button
-          className="sign-in-button"
+          className="flex items-center justify-center gap-2 bg-blue-600 text-gray-900 font-bold px-6 py-3 rounded-2xl hover:bg-blue-700"
           onClick={(e) => {
             e.stopPropagation();
             setOpen(!open);
@@ -47,23 +46,22 @@ function SignIn() {
             <img
               src={user.photoURL}
               alt="User Avatar"
-              className="user-avatar"
+              className="w-9 h-9 rounded-full"
               referrerPolicy="no-referrer"
               width="36"
               height="36"
-              style={{ borderRadius: "50%" }}
             />
           </span>
           {user.displayName}
         </button>
 
-        <div className={`dropdown-menu ${open ? "open" : ""}`}>
-
+        <div className={`absolute top-full left-0 right-0 max-h-0 opacity-0 overflow-hidden transform -translate-y-1 transition-all duration-300 ${open ? 'max-h-96 opacity-100 translate-y-0' : ''} z-50`}>
           <button
             onClick={() => {
               signOutUser();
               setOpen(false);
             }}
+            className="w-[calc(100%-10px)] mx-auto my-2 flex items-center justify-center gap-2 bg-blue-600 text-gray-900 font-bold px-6 py-3 rounded-2xl hover:bg-blue-700"
           >
             <Icon icon="mdi:sign-out-variant" width="24" height="24" />
             Sign Out
@@ -71,12 +69,13 @@ function SignIn() {
           {user.isAdmin && (
             <Link 
               to="/dashboard" 
-              className="dropdown-item" 
+              className="dropdown-item block" 
               onClick={() => setOpen(false)}
             >
-              <button style={{ backgroundColor: "#e63946" }}>
+              <button className="w-[calc(100%-10px)] mx-auto my-2 flex items-center justify-center gap-2 bg-red-600 text-gray-900 font-bold px-6 py-3 rounded-2xl hover:bg-red-700">
                 <Icon icon="material-symbols:dashboard-2-edit-outline" width="24" height="24" />
-              Dashboard</button>
+                Dashboard
+              </button>
             </Link>
           )}
         </div>
@@ -85,12 +84,10 @@ function SignIn() {
   }
 
   return (
-    <>
-      <button className="sign-in-button" onClick={handleSignIn}>
-        <Icon icon="simple-icons:google" width="24" height="24" />
-        Sign In
-      </button>
-    </>
+    <button className="flex items-center justify-center gap-2 bg-blue-600 text-gray-900 font-bold px-6 py-3 rounded-2xl hover:bg-blue-700" onClick={handleSignIn}>
+      <Icon icon="simple-icons:google" width="24" height="24" />
+      Sign In
+    </button>
   );
 }
 

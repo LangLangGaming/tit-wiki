@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import '../assets/css/Wiki.css';
-import '../assets/css/Wiki.overrides.css'
 import Copyright from "../assets/components/Copyright.jsx";
 import Loading from "../assets/components/Loading.jsx";
 import { slugify } from '../assets/components/wikiComponents/Utils.js';
@@ -39,7 +37,7 @@ const Wiki = () => {
   };
 
   return (
-    <div className="wiki-layout">
+    <div className="flex gap-4 bg-slate-900 text-white min-h-screen">
       {loading && <Loading />}
       <Sidebar grouped={grouped} handleNavClick={handleNavClick} />
       <Content activePage={activePage} />

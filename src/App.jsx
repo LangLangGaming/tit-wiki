@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './assets/css/App.css'
 import Navbar from './assets/components/Navbar'
 import { BrowserRouter as Router, Routes, Route } from 'react-router'
 import Wiki from './pages/Wiki.jsx'
@@ -20,10 +19,10 @@ function App() {
   return (
     <>
       <Router>
-        <div className="app-container">
+        <div className="flex flex-col min-h-screen pt-[72px]">
           <Navbar />
 
-          <div className="page-container">
+          <div className="flex-1">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/wiki" element={<Wiki />} />
@@ -33,7 +32,7 @@ function App() {
             </Routes>
           </div>
 
-          <footer className="site-footer">
+          <footer className="w-full flex flex-col items-center justify-center p-4">
             <Copyright />
           </footer>
         </div>

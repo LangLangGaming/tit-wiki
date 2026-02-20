@@ -1,14 +1,12 @@
 import React from 'react';
 import { renderBlocks } from './Renderer.jsx';
 import { slugify } from './Utils.js';
-import '../../css/Wiki.css';
-import '../../css/Wiki.overrides.css';
 
 
 function Content({ activePage }) {
     return (
-        <main className="wiki-main">
-            <div className="wiki-listing">
+        <main className="flex-1 p-12\">
+            <div>
                 {activePage ? (() => {
                     let blocks = [];
                     try {
@@ -18,12 +16,12 @@ function Content({ activePage }) {
                     }
                     const id = activePage.slug || slugify(activePage.title) || activePage.id;
                     return (
-                        <article className="wiki-content" id={id} key={activePage.id}>
-                            <h1>{activePage.title}</h1>
+                        <article className="font-nunito-sans text-lg text-gray-300 leading-relaxed" id={id} key={activePage.id}>
+                            <h1 className="text-4xl font-bold text-white mb-4">{activePage.title}</h1>
                             {renderBlocks(blocks, id)}
                         </article>
                     );
-                })() : <p className="no-page">No page selected.</p>}
+                })() : <p className="text-gray-500">No page selected.</p>}
             </div>
         </main>
     );

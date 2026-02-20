@@ -8,8 +8,6 @@ import Sidebar from "./editorComponents/Sidebar";
 import CategoryBar from "./editorComponents/CategoryBar";
 import ActionFooter from "./editorComponents/ActionFooter";
 import Loading from "../src/assets/components/Loading.jsx";
-import "./Dashboard.css";
-import "./Editor.css";
 
 const Dashboard = () => {
   const [title, setTitle] = useState("");
@@ -45,7 +43,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="wiki-container-layout">
+    <div className="flex gap-4 bg-slate-900 text-white min-h-screen pt-20">
       {loading && <Loading />}
       
       <Sidebar 
@@ -55,8 +53,8 @@ const Dashboard = () => {
         categories={categories} 
       />
 
-      <div className="wiki-editor-wrapper">
-        <header className="editor-header">
+      <div className="flex-1 flex flex-col p-5 min-w-0">
+        <header className="mb-6">
           <CategoryBar 
             categories={categories} 
             setCategories={setCategories}
@@ -64,14 +62,14 @@ const Dashboard = () => {
             setActiveCategory={setCategory} 
           />
           <input 
-            className="wiki-title-input" 
+            className="w-full text-4xl font-bold font-nunito-sans border-b border-gray-600 bg-transparent text-white outline-none p-2 mb-6" 
             value={title} 
             onChange={(e) => setTitle(e.target.value)} 
             placeholder="Enter Page Title..." 
           />
         </header>
 
-        <main className="editor-content">
+        <main className="flex-1">
           <div id="editorjs"></div> 
         </main>
 

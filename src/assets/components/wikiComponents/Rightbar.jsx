@@ -1,20 +1,18 @@
 import React from "react";
-import '../../css/Wiki.css';
-import '../../css/Wiki.overrides.css'
 
 function Rightbar({ activePage, tocFor }) {
 
     return (
-        <aside className="toc-panel">
-            <div className="toc-header"><h3>On this page</h3></div>
-            <nav className="toc-list">
-                <ul>
+        <aside className="w-72 sticky top-0 h-screen overflow-y-auto bg-slate-800 border-l border-slate-700 p-4">
+            <div className="mb-6"><h3 className="text-lg font-intel-mono font-normal text-blue-400 uppercase mb-4">On this page</h3></div>
+            <nav>
+                <ul className="space-y-2">
                     {tocFor(activePage).map((t, idx) => (
-                        <li key={idx} className={`toc-item level-${t.level}`}>
-                            <a href={`#${t.id}`} onClick={(e) => { e.preventDefault(); const el = document.getElementById(t.id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }}>{t.text}</a>
+                        <li key={idx} className={`level-${t.level}`}>
+                            <a href={`#${t.id}`} onClick={(e) => { e.preventDefault(); const el = document.getElementById(t.id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }} className="text-gray-400 hover:text-white transition text-sm">{t.text}</a>
                         </li>
                     ))}
-                    {tocFor(activePage).length === 0 && <li className="toc-empty">No headings</li>}
+                    {tocFor(activePage).length === 0 && <li className="text-gray-500 text-sm">No headings</li>}
                 </ul>
             </nav>
         </aside>

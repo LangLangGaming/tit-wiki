@@ -2,7 +2,6 @@ import React from "react";
 import { Icon } from '@iconify/react';
 import { db } from "../../src/firebase.config.js";
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
-import "../Dashboard.css";
 
 const ActionFooter = ({ selectedPageId, title, category, pages, onSave, onRefresh, onSelectPage }) => {
   
@@ -22,19 +21,19 @@ const ActionFooter = ({ selectedPageId, title, category, pages, onSave, onRefres
   };
 
   return (
-    <footer className="editor-actions">
-      <button className="publish-btn" onClick={() => onSave(title, category, selectedPageId).then(onRefresh)}>
+    <footer className="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-700">
+      <button className="py-2 px-6 rounded bg-blue-600 text-white font-bold hover:bg-blue-700 transition flex items-center gap-2" onClick={() => onSave(title, category, selectedPageId).then(onRefresh)}>
         <Icon icon={selectedPageId ? "ic:sharp-update" : "ic:baseline-publish"} width={20} />
         {selectedPageId ? "Update Page" : "Upload to Firebase"}
       </button>
 
       {selectedPageId && (
         <>
-          <button className="publish-toggle-btn" onClick={handlePublishToggle}>
+          <button className="py-2 px-6 rounded bg-slate-700 text-white font-bold hover:bg-slate-600 transition flex items-center gap-2" onClick={handlePublishToggle}>
             <Icon icon="ic:baseline-visibility" width={20} />
             {currentPage?.published ? "Unpublish" : "Publish"}
           </button>
-          <button className="delete-btn" onClick={handleDelete}>
+          <button className="py-2 px-6 rounded bg-red-600 text-white font-bold hover:bg-red-700 transition flex items-center gap-2" onClick={handleDelete}>
             <Icon icon="ic:baseline-delete-outline" width={24} />
             Delete Page
           </button>
