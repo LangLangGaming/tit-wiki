@@ -14,7 +14,7 @@ function AppContent() {
   return (
     <>
       <Navbar />
-      <div className="flex bg-slate-950 flex-col h-screen pt-20">
+      <div className="flex flex-col h-screen pt-20">
         <div className="flex-1">
           <Routes>
             <Route path="/" element={<Home />} />
