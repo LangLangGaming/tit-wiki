@@ -36,7 +36,7 @@ function SignIn() {
     return (
       <div className="signin-wrapper relative inline-block w-fit">
         <button
-          className="flex items-center justify-center gap-2 bg-blue-600 text-gray-900 font-bold px-6 py-3 rounded-2xl hover:bg-blue-700"
+          className="flex items-center justify-center gap-2 text-blue-500 font-bold px-4 py-2 rounded-lg hover:bg-white/5 hover:border-blue-600 border border-gray-700"
           onClick={(e) => {
             e.stopPropagation();
             setOpen(!open);
@@ -61,7 +61,7 @@ function SignIn() {
               signOutUser();
               setOpen(false);
             }}
-            className="w-[calc(100%-10px)] mx-auto my-2 flex items-center justify-center gap-2 bg-blue-600 text-gray-900 font-bold px-6 py-3 rounded-2xl hover:bg-blue-700"
+            className="w-[calc(100%-10px)] mx-auto my-2 flex items-center justify-center gap-2 text-blue-500 font-bold px-8 py-3 rounded-lg hover:bg-white/5 hover:border-blue-600 border border-gray-700"
           >
             <Icon icon="mdi:sign-out-variant" width="24" height="24" />
             Sign Out
@@ -72,7 +72,7 @@ function SignIn() {
               className="dropdown-item block" 
               onClick={() => setOpen(false)}
             >
-              <button className="w-[calc(100%-10px)] mx-auto my-2 flex items-center justify-center gap-2 bg-red-600 text-gray-900 font-bold px-6 py-3 rounded-2xl hover:bg-red-700">
+              <button className="w-[calc(100%-10px)] mx-auto my-2 flex items-center justify-center gap-2 text-red-500 font-bold px-8 py-3 rounded-lg hover:bg-white/5 hover:border-red-600 border border-gray-700">
                 <Icon icon="material-symbols:dashboard-2-edit-outline" width="24" height="24" />
                 Dashboard
               </button>
@@ -84,8 +84,8 @@ function SignIn() {
   }
 
   return (
-    <button className="flex items-center justify-center gap-2 bg-blue-600 text-gray-900 font-bold px-6 py-3 rounded-2xl hover:bg-blue-700" onClick={handleSignIn}>
-      <Icon icon="simple-icons:google" width="24" height="24" />
+    <button className="flex items-center justify-center gap-2 text-blue-500 font-bold px-8 py-3 rounded-lg hover:bg-white/5 hover:border-blue-600 border border-gray-700" onClick={handleSignIn}>
+      <Icon icon="logos:google-icon" width="24" height="24" />
       Sign In
     </button>
   );
