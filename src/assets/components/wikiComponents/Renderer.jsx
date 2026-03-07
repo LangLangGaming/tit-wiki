@@ -6,15 +6,23 @@ function renderBlocks(blocks, pageSlug) {
   return blocks.map((b, i) => {
     const key = `${pageSlug || 'p'}-block-${i}`;
     switch (b.type) {
-      case 'header': {
-        const level = b.data.level || 2;
-        const Tag = `h${level}`;
-        const id = `${pageSlug || 'p'}-${slugify(b.data.text || '')}-${i}`;
-        return React.createElement(Tag, { id, key }, b.data.text);
-      }
+      case 'header': { 
+  const level = b.data.level || 2;
+  const Tag = `h${level}`;
+  const id = `${pageSlug || 'p'}-${slugify(b.data.text || '')}-${i}`;
+  const headingClass = {
+    1: 'text-3xl font-bold  text-blue-400 mt-8 mb-4',
+    2: 'text-2xl font-bold font-crimson-pro text-blue-400 mt-8 mb-3',
+    3: 'text-xl font-semibold text-white mt-6 mb-2',
+    4: 'text-lg font-semibold text-gray-200 mt-4 mb-2',
+    5: 'text-base font-semibold text-gray-300 mt-3 mb-1',
+    6: 'text-sm font-semibold text-gray-400 mt-2 mb-1',
+  }[level] || 'text-xl font-bold text-white mt-6 mb-2';
+  return React.createElement(Tag, { id, key, className: headingClass }, b.data.text);
+}
       case 'paragraph':
         return (
-          <p key={key} dangerouslySetInnerHTML={{ __html: b.data.text || '' }} />
+          <p key={key} className="text-gray-300 font-nunito-sans font-normal text-lg leading-relaxed mb-4" dangerouslySetInnerHTML={{ __html: b.data.text || '' }} />
         );
       case 'list':
         if (b.data.style === 'ordered') {

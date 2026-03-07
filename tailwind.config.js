@@ -26,6 +26,7 @@ export default {
         'nunito-sans': "'Nunito Sans', sans-serif",
         'black-ops': "'Black Ops One', sans-serif",
         'space-grotesk': "'Space Grotesk', sans-serif",
+        'crimson-pro': "'Crimson Pro', serif",
       },
       keyframes: {
         spin: {
