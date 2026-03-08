@@ -19,6 +19,7 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/wiki" element={<Wiki />} />
+            <Route path="/wiki/:slug" element={<Wiki />} />
             <Route path="/credits" element={<Credits />} />
             <Route path="/dev-diaries" element={<DevDiaries />} />
             <Route path="/dashboard" element={<Dashboard />} />

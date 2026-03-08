@@ -5,8 +5,8 @@ import { slugify } from './Utils.js';
 
 function Content({ activePage }) {
     return (
-        <main className="flex-1 p-12\">
-            <div>
+        <main className="flex-1 p-12 flex justify-center  ">
+            <div className="w-full max-w-5xl">
                 {activePage ? (() => {
                     let blocks = [];
                     try {
@@ -16,8 +16,8 @@ function Content({ activePage }) {
                     }
                     const id = activePage.slug || slugify(activePage.title) || activePage.id;
                     return (
-                        <article className="font-nunito-sans text-lg text-gray-300 leading-relaxed" id={id} key={activePage.id}>
-                            <h1 className="text-5xl font-bold font-crimson-pro text-blue-300 mb-4">{activePage.title}</h1>
+                        <article className="font-nunito-sans text-lg text-gray-300 leading-relaxed" key={activePage.id}>
+                            <h1 className="text-5xl font-bold font-crimson-pro text-blue-300 mb-4 -mt-4">{activePage.title}</h1>
                             {renderBlocks(blocks, id)}
                         </article>
                     );

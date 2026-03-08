@@ -6,19 +6,28 @@ import { renderBlocks } from '../assets/components/wikiComponents/Renderer.jsx';
 import { useFirebaseLogic } from '../assets/components/wikiComponents/FirebaseLogic.mjs';
 import Sidebar from '../assets/components/wikiComponents/Sidebar.jsx';
 import Content from '../assets/components/wikiComponents/Content.jsx';
-import Rightbar from '../assets/components/wikiComponents/Rightbar.jsx';
+import Rightbar from '../assets/components/wikiComponents/Rightbar.jsx'; 
+import { useParams, useNavigate } from "react-router-dom";
 
 
 const Wiki = () => {
   const [activeSlug, setActiveSlug] = useState(null);
+  const { slug } = useParams();
+  const navigate = useNavigate();
   const { pages, loading, grouped } = useFirebaseLogic();
 
   const handleNavClick = (e, page) => {
-    e.preventDefault();
-    const el = document.getElementById(page.slug);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-    setActiveSlug(page.slug);
+    navigate(`/wiki/${page.slug}`);
   };
+
+  // On load, find the page matching the slug
+  useEffect(() => {
+    if (slug && pages.length > 0) {
+      const match = pages.find(p => p.slug === slug);
+      if (match) setActiveSlug(match.slug);
+    }
+  }, [slug, pages]);  
+
 
   const activePage = pages.find(p => p.slug === activeSlug) || pages[0];
 
@@ -39,7 +48,7 @@ const Wiki = () => {
   return (
     <div className="flex gap-4 text-white min-h-screen">
       {loading && <Loading />}
-      <Sidebar grouped={grouped} handleNavClick={handleNavClick} />
+      <Sidebar grouped={grouped} handleNavClick={handleNavClick} activePage={activePage} />
       <Content activePage={activePage} />
       <Rightbar activePage={activePage} tocFor={tocFor} />
     </div>
