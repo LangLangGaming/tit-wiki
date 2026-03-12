@@ -9,7 +9,8 @@ export default {
     extend: {
       colors: {
         accent: '#e63946',
-        link: '#4dabf7',
+        link: '#4dabf7',  
+        background: '#060912'
       },
       spacing: {
         'navbar-height': '72px',

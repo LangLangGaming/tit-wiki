@@ -6,6 +6,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useAuth } from "./AuthContext.jsx";
 import { Link } from "react-router-dom"; // Import Link for navigation
 
+
 function useCloseDropdown(setOpen, active) {
   useEffect(() => {
     if (!active) return;
@@ -55,13 +56,13 @@ function SignIn() {
           {user.displayName}
         </button>
 
-        <div className={`absolute top-full left-0 right-0 max-h-0 opacity-0 overflow-hidden transform -translate-y-1 transition-all duration-300 ${open ? 'max-h-96 opacity-100 translate-y-0' : ''} z-50`}>
+        <div className={`absolute top-full left-0 right-0 max-h-0 opacity-0 overflow-hidden transform -translate-y-1 transition-all duration-300 ${open ? 'max-h-96 opacity-100  translate-y-0' : ''} z-50`}>
           <button
             onClick={() => {
               signOutUser();
               setOpen(false);
             }}
-            className="w-[calc(100%-10px)] mx-auto my-2 flex items-center justify-center gap-2 text-blue-500 font-bold px-8 py-3 rounded-lg hover:bg-white/5 hover:border-blue-600 border border-gray-700"
+            className="w-[calc(100%-10px)] mx-auto my-2 flex items-center justify-center gap-2 text-blue-500 font-bold px-8 py-3 bg-slate-950 rounded-lg hover:border-blue-600 border border-gray-700"
           >
             <Icon icon="mdi:sign-out-variant" width="24" height="24" />
             Sign Out
@@ -72,7 +73,7 @@ function SignIn() {
               className="dropdown-item block" 
               onClick={() => setOpen(false)}
             >
-              <button className="w-[calc(100%-10px)] mx-auto my-2 flex items-center justify-center gap-2 text-red-500 font-bold px-8 py-3 rounded-lg hover:bg-white/5 hover:border-red-600 border border-gray-700">
+              <button className="w-[calc(100%-10px)] mx-auto my-2 flex items-center justify-center gap-2 text-red-500 bg-slate-950 font-bold px-8 py-3 rounded-lg hover:border-red-600 border border-gray-700">
                 <Icon icon="material-symbols:dashboard-2-edit-outline" width="24" height="24" />
                 Dashboard
               </button>

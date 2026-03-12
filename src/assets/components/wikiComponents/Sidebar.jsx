@@ -12,13 +12,13 @@ function Sidebar({ grouped, handleNavClick, activePage }) {
             <ul className="border-l border-gray-300 pl-4 mb-4 font-crimson-pro">
               {list.map(page => (
                 <li key={page.id} className="mb-2">
-                  <a href={`#${page.slug}`}
+                  <span
                     onClick={(e) => handleNavClick(e, page)}
-                    className={`block px-3 py-1 transition text-base font-nunito-sans ${activePage?.id === page.id
+                    className={`block px-3 py-1 transition text-base font-nunito-sans cursor-pointer ${activePage?.id === page.id
                         ? 'text-sky-200 border-l-2 border-blue-400 bg-gray-900 pl-2.5 rounded-sm'
                         : 'text-slate-600 hover:text-slate-100 border-l-2 border-transparent'
                       }`}
-                  >{page.title}</a>
+                  >{page.title}</span>
                 </li>
               ))}
             </ul>

@@ -17,7 +17,7 @@ function Rightbar({ activePage, tocFor }) {
                                     4: 'text-sm font-semibold font-nunito-sans text-gray-600 pl-6',
                                 }[t.level] || 'text-sm text-gray-400';
                                 return (
-                                    <a href={window.location.pathname}
+                                    <a href="#"
                                         onClick={(e) => {
                                             e.preventDefault();
                                             const el = document.getElementById(t.id);
@@ -27,7 +27,7 @@ function Rightbar({ activePage, tocFor }) {
                                     >{t.text}</a>
                                 );
                             })()}
-                        </li>
+                        </li> 
                     ))}
                     {tocFor(activePage).length === 0 && <li className="text-gray-500 text-sm">No headings</li>}
                 </ul>
