@@ -5,7 +5,7 @@ import { slugify } from './Utils.js';
 
 function Content({ activePage }) {
     return (
-        <main className="flex-1 p-12 flex justify-center  ">
+        <main className="flex-1 p-12 -mt-74 flex justify-center  ">
             <div className="w-full max-w-5xl">
                 {activePage ? (() => {
                     let blocks = [];
@@ -27,4 +27,4 @@ function Content({ activePage }) {
     );
 }
 
-export default Content;
+export default Content; 

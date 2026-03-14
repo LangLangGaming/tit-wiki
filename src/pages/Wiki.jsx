@@ -17,6 +17,7 @@ const Wiki = () => {
   const { pages, loading, grouped } = useFirebaseLogic();
 
   const handleNavClick = (e, page) => {
+    window.scrollTo({ top: 0 });
     navigate(`/wiki/${page.slug}`);
   };
 
