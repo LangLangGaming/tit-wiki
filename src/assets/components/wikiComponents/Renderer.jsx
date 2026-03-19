@@ -12,7 +12,7 @@ function renderBlocks(blocks, pageSlug) {
   const id = `${pageSlug || 'p'}-${slugify(b.data.text || '')}-${i}`;
   const headingClass = {
     1: 'text-3xl font-bold  text-blue-400 mt-8 mb-4',
-    2: 'text-2xl font-bold font-crimson-pro text-blue-400 mt-8 mb-3',
+    2: 'text-2xl font-bold font-nunito-sans text-blue-400 mt-8 mb-3',
     3: 'text-xl font-semibold text-white mt-6 mb-2',
     4: 'text-lg font-semibold text-gray-200 mt-4 mb-2',
     5: 'text-base font-semibold text-gray-300 mt-3 mb-1',

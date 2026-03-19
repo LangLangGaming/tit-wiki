@@ -22,6 +22,7 @@ export const useWikiEditor = () => {
     if (!editorInstance.current) {
       const editor = new EditorJS({
         holder: 'editorjs',
+        minWidth: 0,
         tools: {
           header: {
             class: Header,

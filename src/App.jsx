@@ -9,7 +9,7 @@ import Dashboard from '../admin/Dashboard.jsx'
 import Copyright from './assets/components/Copyright.jsx'
 
 function AppContent() {
-  const location = useLocation()
+  const location = useLocation() 
 
   return (
     <>
@@ -28,7 +28,7 @@ function AppContent() {
 
         {location.pathname !== '/' && (
           <footer className="w-full flex flex-col items-center justify-center p-4 bg-slate-950">
-            <Copyright />
+            <Copyright hidden={location.pathname.startsWith('/wiki')} />
           </footer>
         )}
       </div>

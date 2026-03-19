@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useWikiEditor } from "./editorComponents/editorLogic.mjs";
-import { db } from "../src/firebase.config.js";
-import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 
 // Sub-components
 import Sidebar from "./editorComponents/Sidebar";
@@ -69,7 +67,7 @@ const Dashboard = () => {
           />
         </header>
 
-        <main className="flex-1">
+        <main className="flex-1 w-full border border-gray-600 -mt-8 font-nunito-sans rounded p-4 overflow-auto ">
           <div id="editorjs"></div> 
         </main>
 

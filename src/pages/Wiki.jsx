@@ -47,7 +47,7 @@ const Wiki = () => {
   };
 
   return (
-    <div className="flex gap-4 text-white min-h-screen">
+    <div className="flex gap-4 text-white min-h-screen overflow-hidden">
       {loading && <Loading />}
       <Sidebar grouped={grouped} handleNavClick={handleNavClick} activePage={activePage} />
       <Content activePage={activePage} />
