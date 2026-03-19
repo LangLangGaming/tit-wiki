@@ -13,7 +13,7 @@ function renderBlocks(blocks, pageSlug) {
   const headingClass = {
     1: 'text-3xl font-bold  text-blue-400 mt-8 mb-4',
     2: 'text-2xl font-bold font-nunito-sans text-blue-400 mt-8 mb-3',
-    3: 'text-xl font-semibold text-white mt-6 mb-2',
+    3: 'text-xl font-bold font-nunito-sans text-white mt-6 mb-2',
     4: 'text-lg font-semibold text-gray-200 mt-4 mb-2',
     5: 'text-base font-semibold text-gray-300 mt-3 mb-1',
     6: 'text-sm font-semibold text-gray-400 mt-2 mb-1',
