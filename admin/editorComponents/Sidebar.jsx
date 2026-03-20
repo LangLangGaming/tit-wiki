@@ -11,7 +11,7 @@ const Sidebar = ({ pages, selectedPageId, onSelectPage, categories }) => {
   const orderedCats = [...categories.filter(c => grouped[c]), ...Object.keys(grouped).filter(k => !categories.includes(k))];
 
   return (
-    <aside className="w-80  border-r border-slate-700 p-4 sticky top-20 h-[calc(100vh-80px)] overflow-y-auto flex flex-col">
+    <aside className="w-80  border-r border-slate-700 p-4 sticky top-5 h-[calc(100vh-80px)] overflow-y-auto flex flex-col">
       <div className="mb-4 pb-4 border-b border-slate-700">
         <h3 className="text-xl font-nunito-sans font-bold mb-3">Page List</h3>
         <button onClick={() => onSelectPage("")} className={`w-full py-2 px-3 rounded text-sm font-bold transition ${!selectedPageId ? 'bg-blue-600 text-white' : 'bg-slate-700 text-gray-300 hover:bg-slate-600'}`}>

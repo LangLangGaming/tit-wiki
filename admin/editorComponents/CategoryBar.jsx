@@ -1,19 +1,30 @@
 import React, { useState } from "react";
 
+
 const CategoryBar = ({ categories, setCategories, activeCategory, setActiveCategory }) => {
   const [isCreatingNew, setIsCreatingNew] = useState(false);
   const [customInput, setCustomInput] = useState("");
 
-  const handleAddCustom = () => {
-    if (!customInput.trim()) return;
-    setCategories([...categories, customInput]);
-    setActiveCategory(customInput);
-    setCustomInput("");
-    setIsCreatingNew(false);
-  };
+const handleAddCustom = () => {
+  const trimmedInput = customInput.trim();
+  if (!trimmedInput) return;
+
+  // Check if it already exists (case-insensitive)
+  const exists = categories.find(
+    (cat) => cat.toLowerCase() === trimmedInput.toLowerCase()
+  );
+
+  if (!exists) {
+    setCategories([...categories, trimmedInput]);
+  }
+  
+  setActiveCategory(exists || trimmedInput);
+  setCustomInput("");
+  setIsCreatingNew(false);
+};
 
   return (
-    <div className="flex flex-wrap gap-3 p-4 items-center">
+    <div className="flex flex-wrap gap-3 mb-4 items-center">
       <div className="flex flex-wrap gap-2">
         {categories.map(cat => (
           <button 

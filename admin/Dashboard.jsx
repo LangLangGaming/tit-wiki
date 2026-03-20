@@ -14,7 +14,6 @@ const Dashboard = () => {
   const [selectedPageId, setSelectedPageId] = useState("");
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState(["Organizations", "Europe", "Asia", "Americas", "Africa", "Oceania", "Other"]);
-
   const { onSave, fetchAllPages, loadContent } = useWikiEditor();
 
   const refreshPages = async () => {
@@ -22,6 +21,21 @@ const Dashboard = () => {
     setPages(data);
     setLoading(false);
   };
+useEffect(() => {
+  if (pages.length > 0) {
+    const defaultCats = ["Organizations", "Europe", "Asia", "Americas", "Africa", "Oceania", "Other"];
+    
+    // Extract unique categories from saved pages
+    const savedCats = pages.map(p => 
+      p.category.charAt(0).toUpperCase() + p.category.slice(1)
+    );
+
+    // Merge defaults + saved categories and remove duplicates
+    const unifiedCategories = Array.from(new Set([...defaultCats, ...savedCats]));
+    
+    setCategories(unifiedCategories);
+  }
+}, [pages]); // This fires every time 'pages' is updated from the API
 
   useEffect(() => { refreshPages(); }, [fetchAllPages]);
 
@@ -41,7 +55,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex gap-4 text-white min-h-screen ">
+    <div className="flex gap-4 text-white h-screen overflow-hidden">
       {loading && <Loading />}
       
       <Sidebar 
@@ -51,8 +65,8 @@ const Dashboard = () => {
         categories={categories} 
       />
 
-      <div className="flex-1 flex flex-col p-5 min-w-0">
-        <header className="mb-6">
+      <div className="flex-1 flex flex-col p-5 h-full overflow-hidden min-w-0">
+        <header className="mb-6 flex-none">
           <CategoryBar 
             categories={categories} 
             setCategories={setCategories}
@@ -60,17 +74,17 @@ const Dashboard = () => {
             setActiveCategory={setCategory} 
           />
           <input 
-            className="w-full text-4xl font-bold font-nunito-sans border-b border-gray-600 bg-transparent text-white outline-none p-2 mb-6" 
+            className="w-full text-4xl font-bold font flex-none-nunito-sans border-b border-gray-600 bg-transparent text-white outline-none p-2 mb-6" 
             value={title} 
             onChange={(e) => setTitle(e.target.value)} 
             placeholder="Enter Page Title..." 
           />
         </header>
 
-        <main className="flex-1 w-full border border-gray-600 -mt-8 font-nunito-sans rounded p-4 overflow-auto ">
+        <main className="flex-1 w-full border border-gray-600 font-nunito-sans min-h-0 rounded p-4 overflow-y-auto ">
           <div id="editorjs"></div> 
         </main>
-
+        <div className="flex-none p-20">
         <ActionFooter 
           selectedPageId={selectedPageId}
           title={title}
@@ -80,6 +94,7 @@ const Dashboard = () => {
           onRefresh={refreshPages}
           onSelectPage={handleSelectPage}
         />
+        </div>
       </div>
     </div>
   );

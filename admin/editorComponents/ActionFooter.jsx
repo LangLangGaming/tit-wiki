@@ -21,7 +21,7 @@ const ActionFooter = ({ selectedPageId, title, category, pages, onSave, onRefres
   };
 
   return (
-    <footer className="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-700">
+    <footer className="flex justify-end gap-3 -mr-20 -mt-10 mb-10 ">
       <button className="py-2 px-6 rounded bg-blue-600 text-white font-bold hover:bg-blue-700 transition flex items-center gap-2" onClick={() => onSave(title, category, selectedPageId).then(onRefresh)}>
         <Icon icon={selectedPageId ? "ic:sharp-update" : "ic:baseline-publish"} width={20} />
         {selectedPageId ? "Update Page" : "Upload to Firebase"}

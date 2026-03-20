@@ -3,7 +3,7 @@ import React from "react";
 
 function Sidebar({ grouped, handleNavClick, activePage }) {
   return (
-    <aside className="w-84 sticky top-0 h-screen overflow-y-auto  p-4 flex flex-col ml-5">
+    <aside className="w-84 sticky top-0 max-h-screen pb-20 overflow-y-auto  p-2 flex flex-col ml-5">
       <nav>
         {Object.keys(grouped).length === 0 && <p className="text-gray-400">No published pages yet.</p>}
         {Object.entries(grouped).map(([cat, list]) => (
