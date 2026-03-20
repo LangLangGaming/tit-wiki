@@ -9,7 +9,7 @@ function Copyright({hidden=false}) {
 
     return (
         <>
-            <h1 className="text-gray-300 font-open-sans text-center text-sm">Talons in Twilight Website v0.2.0<br></br>
+            <h1 className="text-gray-300 font-open-sans text-center text-sm">Talons in Twilight Website v0.2.1<br></br>
             Copyright © 2026 Loredadmedia. All rights reserved.</h1>
         </>
     );
